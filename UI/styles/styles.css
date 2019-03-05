@@ -1,6 +1,8 @@
 header{
     margin-top:0; 
-    height: 80px;
+    height: 100px;
+    display: flex;
+    vertical-align: middle;
     /*box-shadow: 0 3px 20px rgba(0,0,0,.25),
     inset 0 2px 0 rgba(255,255,255,.6);*/
     box-shadow: 0 6px 4px -4px rgba(0, 0, 0, .2);
@@ -30,7 +32,7 @@ input{
     src: url(../fonts/Raleway-Light.ttf); 
    }
   
-h1{
+.site-name{
     font-family: Instagram-1;
     font-weight: 300;
     letter-spacing: 2px;
@@ -38,49 +40,73 @@ h1{
     font-size: 32px;
     transform: scaleX(1.3);
     transform-origin: 0 0;
-    margin-bottom: -50%;
-    margin-left:20%; 
+    
+    margin-left:5%; 
 }
-.description span{
-    margin-left: 2%;
-    font-family: Raleway;
+
+.description p{
+    margin-bottom: 0;
+    margin-top: 0;
+}
+#log-out{
+    margin-top:20px;
+    margin-right: 10px;
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
+    cursor: pointer;
+    border-radius: 50%;
+    width: 44px;
+    height: 43px;
+    margin-left: 10px;
 }
 #user-pic{
+    width:30px;
     font-size: 20px;
-    margin-right: 8%;
-    margin-top:25px;
-    float: right;
 }
-b{
+.postInfo{
+   vertical-align: middle;
+}
+.postInfo b {
     font-family: Instagram-2;
     font-weight: 100;    
     transform: scaleX(1.2);
     margin-left: 1%;
     margin-right: 1%;
 }
-#user-name{
-    margin-right: 10px;
-    margin-top:30px;
-    float: right;
+.postInfo date{
+    font-family: Instagram-2;
+    font-weight: 100;    
+    transform: scaleX(1.2);
+    margin-top: 8px;
+    margin-right: 1%;
+}
+.user-name{
+    font-family: Instagram-2;
+    transform: scaleX(1.2);
+    margin-left: 48%;
+    margin-top: 30px;
+    display: inline-block;
 }
 
 .like{
     display: inline-block;
-    margin-left: 135px;
+    margin-left: 500px;
     width: 38px;
     height: 38px;
     cursor: pointer;
     border-radius: 50%;
+    margin-top: 4px;
 
   box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
 }
 .add-post{
     display: inline-block;
-    margin-left: 35px;
-    width: 40px;
-    height: 40px;
+    margin-left: 8%;
+    width: 44px;
+    height: 44px;
     cursor: pointer;
     border-radius: 50%;
+    margin-top: 20px;
+    
 
     box-shadow: 1px 1px 9px 1px rgba(0,0,0,.25)/*,
     inset 0 2px 0 rgba(255,255,255,.6),
@@ -88,42 +114,41 @@ b{
     inset 0 0 20px rgba(0,0,0,.1);*/
 }
 .add-post:hover { 
-    background: linear-gradient(rgb(241, 242, 250), rgb(68, 71, 73)) rgb(21, 23, 27);
-     
+    background: linear-gradient(rgb(255, 255, 255), rgb(197, 193, 193)) rgb(243, 243, 243);
 }
-.knop:hover{
-    background: linear-gradient(rgb(241, 242, 250), rgb(68, 71, 73)) rgb(21, 23, 27);
+#filter:hover{
+    background: linear-gradient(rgb(255, 255, 255), rgb(197, 193, 193)) rgb(243, 243, 243);
 }
 #show-more:hover{
-    background: linear-gradient(rgb(241, 242, 250), rgb(68, 71, 73)) rgb(21, 23, 27);
+    background: linear-gradient(rgb(255, 255, 255), rgb(197, 193, 193)) rgb(243, 243, 243);
 }
-#site-name:hover{
+.site-name:hover{
     color: rgb(136, 136, 136);
 }
 .like:hover{
     background: linear-gradient(rgb(255, 52, 2), rgb(161, 40, 24)) rgb(182, 29, 29);
 }
 .description-button:hover{
-    background: linear-gradient(rgb(241, 242, 250), rgb(68, 71, 73)) rgb(21, 23, 27);
+    background: linear-gradient(rgb(255, 255, 255), rgb(197, 193, 193)) rgb(243, 243, 243);
 }
-#sign-in ,#filter button,#show-more{
+#log-out:hover{
+    background: linear-gradient(rgb(255, 255, 255), rgb(197, 193, 193)) rgb(243, 243, 243);
+}
+#sign-in ,#filter,#show-more{
    
     display: inline-block;
     margin-top:25px;
     margin-right: 10%; 
-    float: right;
-    -webkit-border-radius: 14px;
-    -moz-border-radius: 14px;
-    
-    box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);/*,
-    inset 0 2px 0 rgba(255,255,255,.6),
-    0 2px 0 rgba(0,0,0,.1),
-    inset 0 0 20px rgba(0,0,0,.1);*/
+    border-radius: 14px;
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
     font-size: 16px;
+}
+#sign-in{
+    display: none;
 }
 #show-more{
     width: 131px;
-    margin-right:42%;
+    margin-left:42%;
     font-family: Instagram-2;
 }
 
@@ -143,7 +168,6 @@ b{
 .search {
     width: 131px;
     margin-top:40px; 
-    margin-left: 25%;
     height: 23px;
     position: relative;
   }
@@ -187,43 +211,29 @@ b{
   input[type="search"] {
     -webkit-appearance: none;
   }
-
-/*#sidebar input{
-    margin-top:40px; 
-    margin-left: 25%;
-    height: 23px;;
-    text-align: center;
-    -webkit-border-radius: 14px;
-    -moz-border-radius: 14px;
-    box-shadow: 1px 1px 1px 1px rgba(0,0,0,.25),
-    inset 0 2px 0 rgba(255,255,255,.6),
-    0 2px 0 rgba(0,0,0,.1),
-    inset 0 0 20px rgba(0,0,0,.1);
-    -webkit-appearance: none;
-}*/
 #sign-in span{
     font-family: Instagram-2;
     color: #000;
 }
 
-#filter button span{
+#filter span{
     font-family: Instagram-2;
     color: #000;
 }
+main{
+    display: flex;
+    justify-content: flex-start;
+}
 #wrapper{
     width: 640px;
-    float: left;
-    margin-left: 35%;
+    margin-left: 30%;
     padding-bottom: 90px;
 }
-
-/*#filter{
-    display:inline;
-}*/
 .post{
+    display: block;
     margin-top: 30px;
     border: 0 solid #000000;
-    height: 780px;
+    height: 815px;
     box-shadow: 0 3px 20px rgba(0,0,0,.25),
     inset 0 2px 0 rgba(255,255,255,.6);
  }
@@ -238,17 +248,19 @@ b{
  }
 .image{
   margin-top: 10px;
+  width:640px; 
+  height:640px;
 }
 .description{
   margin-top: 0;
+  margin-left: 5px;
 }
 .description a{
     color: #000;
 }
 #sidebar{
     box-sizing: border-box;
-    float: left;
-    margin-right: 9.5%;
+    margin-left: 30px;
 }
 ::-webkit-input-placeholder {
     color: rgb(2, 2, 2);
@@ -259,9 +271,8 @@ b{
     outline-width: medium;
 }
 
-#filter button{
+#filter{
     margin-top: 25px;
-    margin-right: -25%; 
     width: 131px;
 }
 @media screen and (max-width: 1770px){
@@ -280,7 +291,6 @@ b{
     }
     #wrapper{
         margin:0 auto;
-        float: none;
     }
 }
 @media screen and (max-width: 640px){
@@ -292,24 +302,31 @@ b{
    }
 }
 footer{
-    /*box-shadow: 0 3px 20px rgba(0,0,0,.25),
-    inset 0 2px 0 rgba(255,255,255,.6);*/
-    -webkit-box-shadow: 0px -3px 2px 0px rgba(2, 2, 2, 0.06);
-    -moz-box-shadow:    0px -3px 2px 0px rgba(2, 2, 2, 0.06);
     box-shadow:         0px -3px 2px 0px rgba(2, 2, 2, 0.06);
     clear: both;
+    display: flex;
+    justify-content: space-between;
     flex: 0 0 auto;
-    height: 50px;
     border-top: 1px solid rgb(219, 219, 219);
-    /*background: url(../images/footer.jpg) repeat center bottom;*/
+    height: 80px;
 }
-footer .footer-elems{
-    text-align: center;
-    margin: 10px auto auto;
+.footer-elems{
     color: rgb(219, 219, 219);
-    line-height: 0px;
+    line-height: 12px;
     font-size: 10px;
+    display: inline-block;
+    margin-right: 50px;
+    margin-top: 15px;
 }
-.footer-elems a{
+footer .site-name{
+    
+    display: inline-block;
+}
+.footer-elems b{
+    display: block;
+}
+footer a{
+    display: block;
+    font-family: Instagram-2;
     color: rgb(44, 37, 37);
 }
