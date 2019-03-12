@@ -199,10 +199,7 @@ var posts = (function () {
                 }
             }
         }
-        if (count !== 0 && count === configTags.length) {
-            return true;
-        }
-        return false;
+        return count !== 0 && count === configTags.length;
     }
     module.getPhotoPosts = function (skip = 0, top = 10, filterConfig = defaultFilterConfig) {
         if (typeof skip !== 'number' || typeof top !== 'number' || typeof filterConfig !== 'object') {
@@ -263,7 +260,7 @@ var posts = (function () {
         return true;
     };
     module.addPhotoPost = function (post) {
-        if (!photoPosts.find((el) => el.id === post.id) && module.validatePhotoPost(post)) {
+        if (!module.getPhotoPost(post.id) && module.validatePhotoPost(post)) {
             photoPosts.push(post);
             photoPosts.sort((a, b) => b.createdAt - a.createdAt);
             return true;
@@ -271,21 +268,19 @@ var posts = (function () {
         return false;
     };
     module.editPhotoPost = function (id, edits) {
-        const i = photoPosts.findIndex((el) => el.id === id);
-        if (i === -1) {
-            return false;
-        }
         var post = posts.getPhotoPost(id);
-        var validateResult = module.validatePhotoPost(post);
-        if (validateResult === false)
-            return false;
-        for (var field in edits) {
-            if (field !== "id" && field !== "author" && field !== "createdAt" && field !== "likes") {
-                post[field] = edits[field];
+        if (post !== undefined) {
+            var validateResult = module.validatePhotoPost(post);
+            if (validateResult === false)
+                return false;
+            for (var field in edits) {
+                if (edits.hasOwnProperty(field) && field !== "id" && field !== "author" && field !== "createdAt" && field !== "likes") {
+                    post[field] = edits[field];
+                }
             }
+            return true;
         }
-        console.log(post);
-        return true;
+        else return false;
     };
     module.removePhotoPost = function (id) {
         const i = photoPosts.findIndex((el) => el.id === id);
