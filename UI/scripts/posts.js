@@ -1,3 +1,7 @@
+
+/**
+ * Always store items ordered br date
+ */
 var posts = (function () {
     var module = {};
     var photoPosts = [
@@ -170,7 +174,7 @@ var posts = (function () {
             author: "glebek2h",
             photoLink: "images/19",
             likes: ["gleb", "hleb"],
-            hashtags: ["#famcs", "#bsu", "#programming"],
+            hashtags: ["da"],
         },
         {
             id: "20",
@@ -190,39 +194,16 @@ var posts = (function () {
         hashtags: [],
     };
 
-    function commonHashtags(postTags, configTags) {
-        var count = 0;
-        for (var i = 0; i < postTags.length; i++) {
-            for (var j = 0; j < configTags.length; j++) {
-                if (configTags[j] === postTags[i]) {
-                    count++;
-                }
-            }
-        }
-        return count !== 0 && count === configTags.length;
-    }
     module.getPhotoPosts = function (skip = 0, top = 10, filterConfig = defaultFilterConfig) {
         if (typeof skip !== 'number' || typeof top !== 'number' || typeof filterConfig !== 'object') {
             return false;
         }
-        if (filterConfig !== defaultFilterConfig) {
-            if (!filterConfig.author) {
-                filterConfig.author = defaultFilterConfig.author;
-            } if (!filterConfig.dateFrom) {
-                filterConfig.dateFrom = defaultFilterConfig.dateFrom;
-            }
-            if (!filterConfig.dateTo) {
-                filterConfig.dateTo = defaultFilterConfig.dateTo;
-            }
-            if (!filterConfig.hashtags) {
-                filterConfig.hashtags = defaultFilterConfig.hashtags;
-            }
-        }
+        filterConfig = Object.assign({}, defaultFilterConfig, filterConfig || {});
         var filtered = photoPosts.filter(a =>
             (a.createdAt >= filterConfig.dateFrom || !filterConfig.dateFrom) &&
             (a.createdAt <= filterConfig.dateTo || !filterConfig.dateTo) &&
             (a.author === filterConfig.author || filterConfig.author === "") &&
-            (commonHashtags(a.hashtags, filterConfig.hashtags) || filterConfig.hashtags.length === 0)
+            (filterConfig.hashtags.every(el => a.hashtags.includes(el)) || filterConfig.hashtags.length === 0)
         ).sort(function (a, b) {
             return b.createdAt - a.createdAt;
         }).slice(skip, skip + top);
@@ -232,7 +213,7 @@ var posts = (function () {
     module.getPhotoPost = function (id) {
         return photoPosts.find((el) => el.id === id);
     };
-    module.validatePhotoPost = function (post) {//check
+    module.validatePhotoPost = function (post) {
         if (!post.id) {
             return false;
         }
@@ -262,7 +243,6 @@ var posts = (function () {
     module.addPhotoPost = function (post) {
         if (!module.getPhotoPost(post.id) && module.validatePhotoPost(post)) {
             photoPosts.push(post);
-            photoPosts.sort((a, b) => b.createdAt - a.createdAt);
             return true;
         }
         return false;
