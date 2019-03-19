@@ -32,7 +32,7 @@ input{
     src: url(../fonts/Raleway-Light.ttf); 
    }
   
-.site-name{
+.site-name ,.footer-site-name{
     font-family: Instagram-1;
     font-weight: 300;
     letter-spacing: 2px;
@@ -40,7 +40,7 @@ input{
     font-size: 32px;
     transform: scaleX(1.3);
     transform-origin: 0 0;
-    
+    margin-top: 25px;
     margin-left:5%; 
 }
 
@@ -104,7 +104,7 @@ input{
     width: 44px;
     height: 44px;
     cursor: pointer;
-    border-radius: 50%;
+    border-radius: 50px;
     margin-top: 20px;
     
 
@@ -152,8 +152,13 @@ input{
     font-family: Instagram-2;
 }
 
-   
-
+.tags-block{
+    margin: 0;
+    padding: 0;
+  } 
+.tag{
+    display: inline;
+}
 .description-button{
     cursor: pointer;
     
@@ -165,17 +170,17 @@ input{
     inset 0 0 20px rgba(0,0,0,.1);*/
 
 }
-.search {
+.search-form {
     width: 131px;
     margin-top:40px; 
     height: 23px;
     position: relative;
   }
   
-  .search input {
+  .search-form input {
     border: none;
   }
-  .search .input {
+  .search-form .input {
 
     width: 100%;
     padding: 8px 37px 9px 15px;
@@ -186,12 +191,12 @@ input{
     font: 13px Tahoma, Arial, sans-serif;
     outline: none;
   }
-  .search .input:focus {
+  .search-form .input:focus {
     box-shadow: inset 0 0 5px rgba(0,0,0,0.2), inset 0 1px 2px rgba(0,0,0,0.4);
     background: #E8E8E8;
     color: #333;
   }
-  .search .submit {
+  .search-form .submit {
     position: absolute;
     top: 5px;
     right: 0;
@@ -203,12 +208,12 @@ input{
   }
   
   
-  .search .submit:hover {
+  .search-form .submit:hover {
     opacity: 0.8;
   }
   
   
-  input[type="search"] {
+  input[type="search-form"] {
     -webkit-appearance: none;
   }
 #sign-in span{
@@ -312,14 +317,13 @@ footer{
 }
 .footer-elems{
     color: rgb(219, 219, 219);
-    line-height: 12px;
-    font-size: 10px;
+    line-height: 15px;
+    font-size: 13px;
     display: inline-block;
     margin-right: 50px;
     margin-top: 15px;
 }
 footer .site-name{
-    
     display: inline-block;
 }
 .footer-elems b{
