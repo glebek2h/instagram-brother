@@ -2,25 +2,25 @@
 /**
  * Always store items ordered by date
  */
-
 const defaultFilterConfig = {
-  _dateFrom: new Date(-8640000000000000), _dateTo: new Date(8640000000000000), _author: '', _hashtags: [],
+  _dateFrom: new Date(-8640000000000000), _dateTo: new Date(8640000000000000), author: '', hashtags: [],
 };
+
 class PhotoPost {
   constructor(id, description, createdAt, author, photolink, tags = [], likes = []) {
-    this._id = id;
-    this._description = description;
-    this._createdAt = new Date(createdAt);
-    this._author = author;
-    this._photolink = photolink;
-    this._hashtags = tags;
-    this._likes = likes;
+    this.id = id;
+    this.description = description;
+    this.createdAt = new Date(createdAt);
+    this.author = author;
+    this.photolink = photolink;
+    this.hashtags = tags;
+    this.likes = likes;
   }
 
   validate() {
-    if (!this._id || !this._description || this._description.length >= 200 || !this._createdAt
-        || !this._author || this._author.length === 0 || !this._photolink
-        || this._photolink.length === 0) {
+    if (!this.id || !this.description || this.description.length >= 200 || !this.createdAt
+        || !this.author || this.author.length === 0 || !this.photolink
+        || this.photolink.length === 0) {
       return false;
     }
     return true;
@@ -37,21 +37,21 @@ class PhotoPosts {
     }
     filterConfig = Object.assign({}, defaultFilterConfig, filterConfig || {});
     let filtered = this._photoPosts
-      .filter(a => (new Date(a._createdAt) >= filterConfig._dateFrom || !filterConfig._dateFrom)
-        && (new Date(a._createdAt) <= filterConfig._dateTo || !filterConfig._dateTo)
-        && (a._author === filterConfig._author || filterConfig._author === '')
-        && (filterConfig._hashtags.length === 0
-        || filterConfig._hashtags.every(el => a._hashtags.includes(el))));
-    filtered = filtered.sort((a, b) => b._createdAt - a._createdAt).slice(skip, skip + top);
+      .filter(a => (new Date(a.createdAt) >= filterConfig._dateFrom || !filterConfig._dateFrom)
+        && (new Date(a.createdAt) <= filterConfig._dateTo || !filterConfig._dateTo)
+        && (a.author === filterConfig.author || filterConfig.author === '')
+        && (filterConfig.hashtags.length === 0
+        || filterConfig.hashtags.every(el => a.hashtags.includes(el))));
+    filtered = filtered.sort((a, b) => b.createdAt - a.createdAt).slice(skip, skip + top);
     return filtered;
   }
 
   getPhotoPost(id) {
-    return this._photoPosts.find(el => el._id === id) || undefined;
+    return this._photoPosts.find(el => el.id === id);
   }
 
   addPhotoPost(post) {
-    if (!this.getPhotoPost(post._id) && post.validate()) {
+    if (!this.getPhotoPost(post.id) && post.validate()) {
       this._photoPosts.push(post);
       return true;
     }
@@ -60,9 +60,9 @@ class PhotoPosts {
 
   editPhotoPost(id, edits) {
     const post = this.getPhotoPost(id);
-    if (post !== undefined && post.validate()) {
+    if (post && post.validate()) {
       Object.keys(edits).forEach((field) => {
-        if (field !== '_id' && field !== '_author' && field !== '_createdAt' && field !== '_likes') {
+        if (field !== 'id' && field !== 'author' && field !== 'createdAt' && field !== 'likes') {
           post[field] = edits[field];
         }
       });
@@ -72,7 +72,7 @@ class PhotoPosts {
   }
 
   removePhotoPost(id) {
-    const i = this._photoPosts.findIndex(el => el._id === id);
+    const i = this._photoPosts.findIndex(el => el.id === id);
     if (i === -1) {
       return false;
     }
