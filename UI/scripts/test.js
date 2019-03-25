@@ -122,6 +122,7 @@ function test() {
   ]));
   console.log('all posts: ');
   console.log(Posts.getPhotoPosts(0, 30));
+
   console.log('-clear');
   Posts.clear();
   console.log('all posts: ');
