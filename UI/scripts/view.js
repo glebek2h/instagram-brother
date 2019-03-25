@@ -17,10 +17,6 @@ const dateConfig = {
   minute: 'numeric',
 };
 class View {
-  constructor() {
-    this.isLoggedUser = false;
-  }
-
   static addPost(post) {
     if (photoPosts.addPhotoPost(post)) {
       const wrapper = document.querySelector('#wrapper');
@@ -64,6 +60,7 @@ class View {
 
   static headerView() {
     const header = document.createElement('header');
+    this.isLoggedUser = false;
     header.innerHTML = `
           <h1 class = "site-name"> glebogram </h1>
           ${this.isLoggedUser ? `<button class="add-post"><i class="fas fa-plus fa-2x"></i></button>
