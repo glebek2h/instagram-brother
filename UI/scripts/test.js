@@ -1,7 +1,5 @@
-
+const Posts = new PhotoPosts();
 function test() {
-  const Posts = new PhotoPosts();
-
   Posts.addPhotoPost(new PhotoPost('1', '_DESCRIPTION', new Date('2011-02-23T23:00:00'), 'gleb9990', 'LINK', ['#famcs'], ['kek']));
   Posts.addPhotoPost(new PhotoPost('2', '_DESCRIPTION', new Date('2000-02-23T23:00:00'), 'nastya', 'LINK', ['#bsu'], ['lol', 'kek']));
   Posts.addPhotoPost(new PhotoPost('3', '_DESCRIPTION', new Date('2018-02-23T23:00:00'), 'glebek2h', 'LINK', ['#famcs', '#bsu'], ['lol', 'kek']));
@@ -91,8 +89,8 @@ function test() {
   console.log(Posts.getPhotoPost('3'));
   console.log('try to edit id=3 post:');
   console.log(Posts.editPhotoPost('3', {
-    _description: 'new _description',
-    _hashtags: ['new tag1', 'new tag2'],
+    description: 'new _description',
+    hashtags: ['new tag1', 'new tag2'],
   }));
   console.log('id=3 post after editing:');
   console.log(Posts.getPhotoPost('3'));
@@ -122,9 +120,21 @@ function test() {
   ]));
   console.log('all posts: ');
   console.log(Posts.getPhotoPosts(0, 30));
-  console.log('-clear');
-  Posts.clear();
-  console.log('all posts: ');
-  console.log(Posts.getPhotoPosts(0, 30));
 }
-test();
+function ViewTest() {
+  View.headerView();
+  View.showPosts();
+  /*
+  View.addPost(new PhotoPost('1', 'Hackerman refers to an image of the character HACKERMAN from the 2015 film Kung Fury that is used in jokes regarding a persons inflated sense of self-esteem when they solve a simple technical issue. ', new Date('2017-02-23T23:00:00'), 'hackerman', 'images/6.jpg', ['#hackerman', '#hacks', '#hacker'], ['lol', 'kek']));
+  View.addPost(new PhotoPost('2', 'Hackerman refers to an image of the character HACKERMAN from the 2015 film Kung Fury that is used in jokes regarding a persons inflated sense of self-esteem when they solve a simple technical issue. ', new Date('2018-02-23T23:00:00'), 'glebyshek', 'images/5.jpg', ['#famcs', '#bsu'], ['lol', 'kek']));
+  View.addPost(new PhotoPost('3', 'Hackerman refers to an image of the character HACKERMAN from the 2015 film Kung Fury that is used in jokes regarding a persons inflated sense of self-esteem when they solve a simple technical issue. ', new Date('2019-02-23T23:00:00'), 'glebek2h', 'images/8.jpg', ['#famcs', '#bsu'], ['lol', 'kek']));
+  View.deletePost('1');
+  View.deletePost('2');
+  View.editPost('3', {
+    description: 'new _description',
+    hashtags: ['newtag1', 'newtag2'],
+  });
+  */
+}
+// test();
+ViewTest();

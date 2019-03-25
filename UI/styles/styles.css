@@ -98,6 +98,12 @@ input{
 
   box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
 }
+.likes-count{
+    font-family:Instagram-2;
+    display: inline-block;
+    margin-left: 5px;
+    
+}
 .add-post{
     display: inline-block;
     margin-left: 8%;
@@ -108,7 +114,7 @@ input{
     margin-top: 20px;
     
 
-    box-shadow: 1px 1px 9px 1px rgba(0,0,0,.25)/*,
+    box-shadow: 1px 1px 2px 1px rgba(0,0,0,.25)/*,
     inset 0 2px 0 rgba(255,255,255,.6),
     0 2px 0 rgba(0,0,0,.1),
     inset 0 0 20px rgba(0,0,0,.1);*/
@@ -134,7 +140,7 @@ input{
 #log-out:hover{
     background: linear-gradient(rgb(255, 255, 255), rgb(197, 193, 193)) rgb(243, 243, 243);
 }
-#sign-in ,#filter,#show-more{
+#filter,#show-more{
    
     display: inline-block;
     margin-top:25px;
@@ -144,7 +150,14 @@ input{
     font-size: 16px;
 }
 #sign-in{
-    display: none;
+    margin-top:20px;
+    margin-right: 10px;
+    margin-left: 70%;
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
+    cursor: pointer;
+    border-radius: 50%;
+    width: 44px;
+    height: 43px;
 }
 #show-more{
     width: 131px;
