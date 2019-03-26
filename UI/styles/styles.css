@@ -49,6 +49,7 @@ input{
     margin-top: 0;
 }
 #log-out{
+    display: none;
     margin-top:20px;
     margin-right: 10px;
     box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
@@ -84,7 +85,8 @@ input{
     transform: scaleX(1.2);
     margin-left: 48%;
     margin-top: 30px;
-    display: inline-block;
+    /*display: inline-block;*/
+    display: none;
 }
 
 .like{
@@ -105,7 +107,8 @@ input{
     
 }
 .add-post{
-    display: inline-block;
+    display: none;
+    /*display: inline-block;*/
     margin-left: 8%;
     width: 44px;
     height: 44px;

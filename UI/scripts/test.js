@@ -1,5 +1,6 @@
-const Posts = new PhotoPosts();
+
 function test() {
+  const Posts = new PhotoPosts();
   Posts.addPhotoPost(new PhotoPost('1', '_DESCRIPTION', new Date('2011-02-23T23:00:00'), 'gleb9990', 'LINK', ['#famcs'], ['kek']));
   Posts.addPhotoPost(new PhotoPost('2', '_DESCRIPTION', new Date('2000-02-23T23:00:00'), 'nastya', 'LINK', ['#bsu'], ['lol', 'kek']));
   Posts.addPhotoPost(new PhotoPost('3', '_DESCRIPTION', new Date('2018-02-23T23:00:00'), 'glebek2h', 'LINK', ['#famcs', '#bsu'], ['lol', 'kek']));
@@ -121,20 +122,33 @@ function test() {
   console.log('all posts: ');
   console.log(Posts.getPhotoPosts(0, 30));
 }
-function ViewTest() {
-  View.headerView();
-  View.showPosts();
-  /*
-  View.addPost(new PhotoPost('1', 'Hackerman refers to an image of the character HACKERMAN from the 2015 film Kung Fury that is used in jokes regarding a persons inflated sense of self-esteem when they solve a simple technical issue. ', new Date('2017-02-23T23:00:00'), 'hackerman', 'images/6.jpg', ['#hackerman', '#hacks', '#hacker'], ['lol', 'kek']));
-  View.addPost(new PhotoPost('2', 'Hackerman refers to an image of the character HACKERMAN from the 2015 film Kung Fury that is used in jokes regarding a persons inflated sense of self-esteem when they solve a simple technical issue. ', new Date('2018-02-23T23:00:00'), 'glebyshek', 'images/5.jpg', ['#famcs', '#bsu'], ['lol', 'kek']));
-  View.addPost(new PhotoPost('3', 'Hackerman refers to an image of the character HACKERMAN from the 2015 film Kung Fury that is used in jokes regarding a persons inflated sense of self-esteem when they solve a simple technical issue. ', new Date('2019-02-23T23:00:00'), 'glebek2h', 'images/8.jpg', ['#famcs', '#bsu'], ['lol', 'kek']));
-  View.deletePost('1');
-  View.deletePost('2');
-  View.editPost('3', {
+function viewTest() {
+  const photoPosts = new PhotoPosts();
+  photoPosts.addPhotoPost(new PhotoPost('1', 'Hackerman refers to an image of the character HACKERMAN from the 2015 film Kung Fury that is used in jokes regarding a persons inflated sense of self-esteem when they solve a simple technical issue. ', new Date('2011-02-23T23:00:00'), 'gleb9990', 'images/1.jpg', ['#famcs'], ['kek']));
+  photoPosts.addPhotoPost(new PhotoPost('2', 'Hackerman refers to an image of the character HACKERMAN from the 2015 film Kung Fury that is used in jokes regarding a persons inflated sense of self-esteem when they solve a simple technical issue. ', new Date('2000-02-23T23:00:00'), 'nastya', 'images/2.jpg', ['#bsu'], ['lol', 'kek']));
+  photoPosts.addPhotoPost(new PhotoPost('3', 'Hackerman refers to an image of the character HACKERMAN from the 2015 film Kung Fury that is used in jokes regarding a persons inflated sense of self-esteem when they solve a simple technical issue. ', new Date('2018-02-23T23:00:00'), 'glebek2h', 'images/3.jpg', ['#famcs', '#bsu'], ['lol', 'kek']));
+  photoPosts.addPhotoPost(new PhotoPost('4', 'Hackerman refers to an image of the character HACKERMAN from the 2015 film Kung Fury that is used in jokes regarding a persons inflated sense of self-esteem when they solve a simple technical issue. ', new Date('2014-02-23T23:00:00'), 'gleb9990', 'images/4.jpg', ['#famcs', '#bsu'], ['lol', 'kek']));
+  photoPosts.addPhotoPost(new PhotoPost('5', 'Hackerman refers to an image of the character HACKERMAN from the 2015 film Kung Fury that is used in jokes regarding a persons inflated sense of self-esteem when they solve a simple technical issue. ', new Date('2018-00-23T23:00:00'), 'kop', 'images/5.jpg', ['#famcs', '#bsu'], ['lol', 'kek']));
+  photoPosts.addPhotoPost(new PhotoPost('6', 'Hackerman refers to an image of the character HACKERMAN from the 2015 film Kung Fury that is used in jokes regarding a persons inflated sense of self-esteem when they solve a simple technical issue. ', new Date('2012-01-23T23:13:00'), 'dima', 'images/6.jpg', ['#famcs', '#bsu'], ['lol', 'kek']));
+  photoPosts.addPhotoPost(new PhotoPost('7', 'Hackerman refers to an image of the character HACKERMAN from the 2015 film Kung Fury that is used in jokes regarding a persons inflated sense of self-esteem when they solve a simple technical issue. ', new Date('2007-02-23T23:11:00'), 'sasha', 'images/7.jpg', ['#famcs', '#bsu'], ['lol', 'kek']));
+  photoPosts.addPhotoPost(new PhotoPost('8', 'Hackerman refers to an image of the character HACKERMAN from the 2015 film Kung Fury that is used in jokes regarding a persons inflated sense of self-esteem when they solve a simple technical issue. ', new Date('2018-03-23T23:22:00'), 'gleb', 'images/8.jpg', ['#famcs', ' #bsu'], ['lol', 'kek']));
+  photoPosts.addPhotoPost(new PhotoPost('9', 'Hackerman refers to an image of the character HACKERMAN from the 2015 film Kung Fury that is used in jokes regarding a persons inflated sense of self-esteem when they solve a simple technical issue. ', new Date('2018-03-26T23:17:41'), 'gleb9990', 'images/10.jpg', ['#famcs', '#bsu'], ['lol', 'kek', '1', 'kek', '1', 'kek', '1', 'kek', '1', 'kek', '1', 'kek', '1', 'kek', '1', 'kek', '1', 'kek', '1', 'kek', '1']));
+
+
+  const view = new View(photoPosts, false);
+  view.displayHeaderElements();
+  view.showPosts();
+
+  view.addPost(new PhotoPost('10', 'Hac1kerman image of the character HACKERMAN from the 2015 film Kung Fury that is used in jokes regarding a persons inflated sense of self-esteem when they solve a simple technical issue. ', new Date('2017-02-23T23:00:00'), 'hackerman', 'images/6.jpg', ['#hackerman', '#hacks', '#hacker'], ['lol', 'kek']));
+  view.addPost(new PhotoPost('11', 'Hac2kerman  to an image of the character HACKERMAN from the 2015 film Kung Fury that is used in jokes regarding a persons inflated sense of self-esteem when they solve a simple technical issue. ', new Date('2018-02-23T23:00:00'), 'glebyshek', 'images/5.jpg', ['#famcs', '#bsu'], ['lol', 'kek']));
+  view.addPost(new PhotoPost('12', 'Hac3kerman to an image of the character HACKERMAN from the 2015 film Kung Fury that is used in jokes regarding a persons inflated sense of self-esteem when they solve a simple technical issue. ', new Date('2019-02-23T23:00:00'), 'glebek2h', 'images/10.jpg', ['#famcs', '#bsu'], ['lol', 'kek']));
+  view.addPost(new PhotoPost('13', 'Hac4kerman tof the character HACKERMAN from the 2015 film Kung Fury that is used in jokes regarding a persons inflated sense of self-esteem when they solve a simple technical issue. ', new Date('2019-02-23T23:00:00'), 'glebek2h', 'images/8.jpg', ['#famcs', '#bsu'], ['lol', 'kek']));
+  view.deletePost('1');
+  view.deletePost('2');
+  view.editPost('3', {
     description: 'new _description',
-    hashtags: ['newtag1', 'newtag2'],
+    hashtags: ['#newtag1', '#newtag2'],
   });
-  */
 }
-// test();
-ViewTest();
+test();
+viewTest();
