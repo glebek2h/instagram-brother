@@ -1,23 +1,22 @@
 
 const dateConfig = {
-  year: 'numeric',
-  month: 'numeric',
-  day: 'numeric',
-  hour: 'numeric',
-  minute: 'numeric',
+  year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',
 };
-
+class User {
+  constructor(name) {
+    this.name = name;
+  }
+}
+const wrapper = document.querySelector('#wrapper');
 class View {
-  constructor(model, isLoggedUser) {
+  constructor(model) {
     this.photoPosts = model;
-    this.isLoggedUser = isLoggedUser;
   }
 
-  addPost(post) {
+  buildPost(post) {
     if (this.photoPosts.addPhotoPost(post)) {
-      const wrapper = document.querySelector('#wrapper');
-      const newPost = View.getNodeWithHtml(post);
-      wrapper.insertAdjacentElement('afterbegin', newPost);
+      const postNode = this.getNodeWithHtml(post);
+      wrapper.insertAdjacentElement('afterbegin', postNode);
       return true;
     }
     return false;
@@ -38,7 +37,7 @@ class View {
     if (this.photoPosts.editPhotoPost(id, edits)) {
       const childNode = document.querySelector(`[data-id="${id}"]`);
       if (childNode) {
-        const editedChildNode = View.getNodeWithHtml(this.photoPosts.getPhotoPost(id));
+        const editedChildNode = this.getNodeWithHtml(this.photoPosts.getPhotoPost(id));
         childNode.parentNode.replaceChild(editedChildNode, childNode);
       }
       return true;
@@ -46,45 +45,44 @@ class View {
     return false;
   }
 
-  showPosts() {
-    this.photoPosts.getPhotoPosts().reverse().forEach((post) => {
-      const wrapper = document.querySelector('#wrapper');
-      const newPost = View.getNodeWithHtml(post);
-      wrapper.insertAdjacentElement('afterbegin', newPost);
+  showPosts(skip = 0, top = 10, filterConfig = defaultFilterConfig) {
+    this.photoPosts.getPhotoPosts(skip, top, filterConfig).forEach((post) => {
+      const postNode = this.getNodeWithHtml(post);
+      wrapper.insertAdjacentElement('beforeend', postNode);
     });
   }
 
-  displayHeaderElements() {
-    if (this.isLoggedUser) {
-      document.querySelector('#sign-in').style.display = 'none';
+  displayHeaderElements(user) {
+    if (user instanceof User) {
+      document.querySelector('.user-name').textContent = user.name;
+      document.querySelector('.sign-in').style.display = 'none';
       document.querySelector('.user-name').style.display = 'inline-block';
-      document.querySelector('#log-out').style.display = 'inline-block';
+      document.querySelector('.log-out').style.display = 'inline-block';
+      document.querySelector('.add-post').style.display = 'inline-block';
     }
   }
 
-  static getNodeWithHtml(post) {
-    const newPost = document.createElement('div');
-    newPost.innerHTML = `<div class = "post">
-      <p class = "postInfo">
-          <b>${post.author}</b><date>${post.createdAt.toLocaleString('en-US', dateConfig)}</date> 
-      </p>
-      <div class="image">
-          <img src=${post.photolink} alt="1" width="640" height="640">
-      </div>
-      <div class = "description">
-          <button class="like"><i class="far fa-thumbs-up fa-2x"></i></button><p class="likes-count">${post.likes.length}</p>
-          <p>
-              <b>${post.author}</b> ${post.description} <button class="description-button">...</button><br> 
-          </p>
-          <ul class="tags-block">
-          </ul>  
-      </div>
-      </div>`;
-    const tagsBlock = newPost.querySelector('.tags-block');
-    newPost.dataset.id = post.id;
+  getNodeWithHtml(post) {
+    const template = document.getElementById('post-template');
+    const fragment = document.importNode(template.content, true);
+    const postNode = fragment.firstElementChild;
+    const likesCount = post.likes.length;
+    const placeholders = postNode.querySelectorAll('[data-target]');
+    [].forEach.call(placeholders || [], (phElement) => {
+      const key = phElement.getAttribute('data-target');
+      if (key === 'createdAt') {
+        phElement.textContent = post[key].toLocaleString('en-US', dateConfig);
+      } else if (key === 'photolink') {
+        phElement.src = post[key];
+      } else if (key === 'likes') {
+        phElement.textContent = `${likesCount} likes`;
+      } else { phElement.textContent = post[key]; }
+    });
+    const tagsBlock = postNode.querySelector('.tags-block');
+    postNode.dataset.id = post.id;
     tagsBlock.innerHTML = post.hashtags.map(
       tag => `<li class="tag"><a href="" >${tag}</a></li>`
     ).join('');
-    return newPost;
+    return postNode;
   }
 }

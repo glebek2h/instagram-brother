@@ -12,13 +12,35 @@
     <header>
         <h1 class = "site-name"> glebogram </h1>
             <button class="add-post"><i class="fas fa-plus fa-2x"></i></button>
-            <div class = "user-name">gleb9990</div>
-            <button id = "log-out"><img src="images/user-image.png" alt="user-image" id = "user-pic"></button>
-            <button id = "sign-in"><span>sign in</span></button>
+            <div class = "user-name"></div>
+            <button class = "log-out"><i class="fas fa-sign-out-alt fa-2x"></i></button>
+            <button class = "sign-in"><span>sign in</span></button>
     </header>
     <main >
         <div id = "wrapper">
-            <button id = "show-more">show more...</button>
+            <!--Here will be our posts-->
+            <template id="post-template">
+                <div class = "post">
+                    <p class = "postInfo">
+                        <b data-target="author"></b><date data-target="createdAt"></date> 
+                    </p>
+                    <div class="image">
+                        <img data-target="photolink"  alt="1" width="640" height="640">
+                    </div>
+                    <div class = "description">
+                        <button class="like" ><i class="far fa-thumbs-up fa-2x"></i></button><p class="likes-count" data-target="likes"></p>
+                        <button class="edit-post"><i class="far fa-edit fa-2x"></i></button>
+                        <button class="delete-post"><i class="far fa-trash-alt fa-2x"></i></button>
+                        <span>
+                            <b data-target="author"></b>
+                            <div  data-target="description"></div>
+                            <button class="description-button">...</button><br> 
+                        </span>
+                        <ul class="tags-block">
+                        </ul>  
+                    </div>
+                </div>
+            </template>
         </div>
         <aside id = "sidebar">
             <form action="javascript:alert('filter')" method="post" class="search-form">
@@ -27,7 +49,8 @@
             </form>
             <button id = "filter"><span>filter by date</span> </button>   
         </aside>
-    </main>
+    </main> 
+    <button id = "show-more">show more...</button>
     <footer>
         <div class = "footer-site-name"> glebogram </div>
         <p class="footer-elems">
@@ -39,6 +62,7 @@
     </footer>
     <script src="scripts/posts.js"></script>
     <script src="scripts/view.js"></script>
+    <script src="scripts/MVC.js"></script>
     <script src="scripts/test.js"></script>
 </body>
 </html>

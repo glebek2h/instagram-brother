@@ -43,12 +43,21 @@ input{
     margin-top: 25px;
     margin-left:5%; 
 }
-
+header{
+    display: flex;
+    justify-content: space-around;
+}
 .description p{
     margin-bottom: 0;
     margin-top: 0;
 }
-#log-out{
+.description span{
+    display: inline-block;
+}
+.description span div{
+    display: inline;
+}
+.log-out{
     display: none;
     margin-top:20px;
     margin-right: 10px;
@@ -91,7 +100,29 @@ input{
 
 .like{
     display: inline-block;
-    margin-left: 500px;
+    margin-left: 5px;
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+    border-radius: 50%;
+    margin-top: 4px;
+
+  box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
+}
+.edit-post{
+    display: inline-block;
+    margin-left: 30px;
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+    border-radius: 50%;
+    margin-top: 4px;
+
+  box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
+}
+.delete-post{
+    display: inline-block;
+    margin-left: 30px;
     width: 38px;
     height: 38px;
     cursor: pointer;
@@ -134,16 +165,14 @@ input{
 .site-name:hover{
     color: rgb(136, 136, 136);
 }
-.like:hover{
-    background: linear-gradient(rgb(255, 52, 2), rgb(161, 40, 24)) rgb(182, 29, 29);
-}
+
 .description-button:hover{
     background: linear-gradient(rgb(255, 255, 255), rgb(197, 193, 193)) rgb(243, 243, 243);
 }
-#log-out:hover{
+.log-out:hover{
     background: linear-gradient(rgb(255, 255, 255), rgb(197, 193, 193)) rgb(243, 243, 243);
 }
-#filter,#show-more{
+#filter{
    
     display: inline-block;
     margin-top:25px;
@@ -152,7 +181,7 @@ input{
     box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
     font-size: 16px;
 }
-#sign-in{
+.sign-in{
     margin-top:20px;
     margin-right: 10px;
     margin-left: 70%;
@@ -163,8 +192,12 @@ input{
     height: 43px;
 }
 #show-more{
+    border-radius: 14px;
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
     width: 131px;
-    margin-left:42%;
+    margin-left: 45%;
+    margin-top: 40px;
+    margin-bottom: 40px;
     font-family: Instagram-2;
 }
 
@@ -232,7 +265,7 @@ input{
   input[type="search-form"] {
     -webkit-appearance: none;
   }
-#sign-in span{
+.sign-in span{
     font-family: Instagram-2;
     color: #000;
 }
@@ -248,7 +281,6 @@ main{
 #wrapper{
     width: 640px;
     margin-left: 30%;
-    padding-bottom: 90px;
 }
 .post{
     display: block;
@@ -288,18 +320,21 @@ main{
 }
 *:focus 
 {
-    outline-color: black;
+    outline-color: rgb(255, 255, 255);
     outline-width: medium;
 }
-
 #filter{
     margin-top: 25px;
     width: 131px;
+}
+.like{
+    background-color: rgb(255, 255, 255);
 }
 @media screen and (max-width: 1770px){
     #wrapper{
         margin-left:25%;
     }
+    
 }
 @media screen and (max-width: 1200px){
     #wrapper{
@@ -349,5 +384,5 @@ footer .site-name{
 footer a{
     display: block;
     font-family: Instagram-2;
-    color: rgb(44, 37, 37);
+    color: rgb(117, 111, 111);
 }
