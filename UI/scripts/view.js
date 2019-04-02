@@ -1,22 +1,19 @@
-
-const dateConfig = {
-  year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',
-};
 class User {
   constructor(name) {
     this.name = name;
   }
 }
-const wrapper = document.querySelector('#wrapper');
+
 class View {
-  constructor(model) {
+  constructor(wrapper, model) {
     this.photoPosts = model;
+    this.wrapper = wrapper;
   }
 
   buildPost(post) {
     if (this.photoPosts.addPhotoPost(post)) {
       const postNode = this.getNodeWithHtml(post);
-      wrapper.insertAdjacentElement('afterbegin', postNode);
+      thiw.wrapper.insertAdjacentElement('afterbegin', postNode);
       return true;
     }
     return false;
@@ -48,17 +45,16 @@ class View {
   showPosts(skip = 0, top = 10, filterConfig = defaultFilterConfig) {
     this.photoPosts.getPhotoPosts(skip, top, filterConfig).forEach((post) => {
       const postNode = this.getNodeWithHtml(post);
-      wrapper.insertAdjacentElement('beforeend', postNode);
+      this.wrapper.insertAdjacentElement('beforeend', postNode);
     });
   }
 
-  displayHeaderElements(user) {
+  setAuthorized(user) {
     if (user instanceof User) {
+      document.body.classList.toggle('is-auth', true);
       document.querySelector('.user-name').textContent = user.name;
-      document.querySelector('.sign-in').style.display = 'none';
-      document.querySelector('.user-name').style.display = 'inline-block';
-      document.querySelector('.log-out').style.display = 'inline-block';
-      document.querySelector('.add-post').style.display = 'inline-block';
+    } else {
+      document.body.classList.toggle('is-auth', false);
     }
   }
 
@@ -67,6 +63,7 @@ class View {
     const fragment = document.importNode(template.content, true);
     const postNode = fragment.firstElementChild;
     const likesCount = post.likes.length;
+    let descriptionTag;
     const placeholders = postNode.querySelectorAll('[data-target]');
     [].forEach.call(placeholders || [], (phElement) => {
       const key = phElement.getAttribute('data-target');
@@ -76,6 +73,9 @@ class View {
         phElement.src = post[key];
       } else if (key === 'likes') {
         phElement.textContent = `${likesCount} likes`;
+      } else if (key === 'description') {
+        phElement.textContent = post[key].substring(0, 76);
+        descriptionTag = phElement;
       } else { phElement.textContent = post[key]; }
     });
     const tagsBlock = postNode.querySelector('.tags-block');

@@ -40,10 +40,14 @@ input{
     font-size: 32px;
     transform: scaleX(1.3);
     transform-origin: 0 0;
-    margin-top: 25px;
+    margin-top: 5px;
     margin-left:5%; 
 }
+.footer-site-name{
+    margin-top: 20px;
+}
 header{
+    height: 60px;
     display: flex;
     justify-content: space-around;
 }
@@ -52,20 +56,20 @@ header{
     margin-top: 0;
 }
 .description span{
-    display: inline-block;
+    display: block;
 }
 .description span div{
     display: inline;
 }
 .log-out{
     display: none;
-    margin-top:20px;
+    margin-top:5px;
     margin-right: 10px;
     box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
     cursor: pointer;
     border-radius: 50%;
-    width: 44px;
-    height: 43px;
+    width: 34px;
+    height: 34px;
     margin-left: 10px;
 }
 #user-pic{
@@ -93,13 +97,13 @@ header{
     font-family: Instagram-2;
     transform: scaleX(1.2);
     margin-left: 48%;
-    margin-top: 30px;
+    margin-top: 12px;
     /*display: inline-block;*/
     display: none;
 }
 
 .like{
-    display: inline-block;
+    display: none;
     margin-left: 5px;
     width: 38px;
     height: 38px;
@@ -110,7 +114,7 @@ header{
   box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
 }
 .edit-post{
-    display: inline-block;
+    display: none;
     margin-left: 30px;
     width: 38px;
     height: 38px;
@@ -121,7 +125,7 @@ header{
   box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
 }
 .delete-post{
-    display: inline-block;
+    display: none;
     margin-left: 30px;
     width: 38px;
     height: 38px;
@@ -141,36 +145,18 @@ header{
     display: none;
     /*display: inline-block;*/
     margin-left: 8%;
-    width: 44px;
-    height: 44px;
+    width: 34px;
+    height: 34px;
     cursor: pointer;
     border-radius: 50px;
-    margin-top: 20px;
-    
-
-    box-shadow: 1px 1px 2px 1px rgba(0,0,0,.25)/*,
-    inset 0 2px 0 rgba(255,255,255,.6),
-    0 2px 0 rgba(0,0,0,.1),
-    inset 0 0 20px rgba(0,0,0,.1);*/
+    margin-top: 5px;
+    box-shadow: 1px 1px 2px 1px rgba(0,0,0,.25)
 }
-.add-post:hover { 
-    background: linear-gradient(rgb(255, 255, 255), rgb(197, 193, 193)) rgb(243, 243, 243);
-}
-#filter:hover{
-    background: linear-gradient(rgb(255, 255, 255), rgb(197, 193, 193)) rgb(243, 243, 243);
-}
-#show-more:hover{
-    background: linear-gradient(rgb(255, 255, 255), rgb(197, 193, 193)) rgb(243, 243, 243);
-}
+/*.add-post:hover,#filter:hover,#show-more:hover,.description-button:hover,.log-out:hover { 
+    background: linear-gradient(rgb(177, 170, 170), rgb(39, 37, 37)) rgb(243, 243, 243);
+}*/
 .site-name:hover{
     color: rgb(136, 136, 136);
-}
-
-.description-button:hover{
-    background: linear-gradient(rgb(255, 255, 255), rgb(197, 193, 193)) rgb(243, 243, 243);
-}
-.log-out:hover{
-    background: linear-gradient(rgb(255, 255, 255), rgb(197, 193, 193)) rgb(243, 243, 243);
 }
 #filter{
    
@@ -182,7 +168,7 @@ header{
     font-size: 16px;
 }
 .sign-in{
-    margin-top:20px;
+    margin-top:5px;
     margin-right: 10px;
     margin-left: 70%;
     box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
@@ -279,6 +265,7 @@ main{
     justify-content: flex-start;
 }
 #wrapper{
+    margin-top: 10px;
     width: 640px;
     margin-left: 30%;
 }
@@ -286,7 +273,7 @@ main{
     display: block;
     margin-top: 30px;
     border: 0 solid #000000;
-    height: 815px;
+    height: 760px;
     box-shadow: 0 3px 20px rgba(0,0,0,.25),
     inset 0 2px 0 rgba(255,255,255,.6);
  }
@@ -305,8 +292,11 @@ main{
   height:640px;
 }
 .description{
-  margin-top: 0;
+  margin-top: 5px;
   margin-left: 5px;
+}
+.text-description{
+    margin-top: 5px;
 }
 .description a{
     color: #000;
@@ -326,6 +316,7 @@ main{
 #filter{
     margin-top: 25px;
     width: 131px;
+    height: 30px;
 }
 .like{
     background-color: rgb(255, 255, 255);
@@ -385,4 +376,28 @@ footer a{
     display: block;
     font-family: Instagram-2;
     color: rgb(117, 111, 111);
+}
+.is-auth .user-name{
+    display: inline-block;
+}
+.is-auth .add-post{
+    display: inline-block;
+}
+.is-auth .log-out{
+    display: inline-block;
+}
+.is-auth .like{
+    display : inline-block;
+}
+.is-auth .delete-post{
+    display : inline-block;
+}
+.is-auth .edit-post{
+    display : inline-block;
+}
+.is-auth .sign-in{
+    display: none;
+}
+.is-auth .post{
+    height: 785px;
 }
