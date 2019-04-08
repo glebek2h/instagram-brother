@@ -16,25 +16,25 @@ input{
     background: white;
 }
 @font-face {
-    font-family: Instagram-1; 
-    src: url(../fonts/9424.ttf); 
-   }
-   @font-face {
-    font-family: Instagram-2; 
-    src: url(../fonts/3952.ttf); 
-   }
-   @font-face {
-    font-family: Pacifico; 
-    src: url(../fonts/Pacifico.ttf); 
-   }
-   @font-face {
-    font-family: Raleway; 
-    src: url(../fonts/Raleway-Light.ttf); 
-   }
+font-family: Instagram-1; 
+src: url(../fonts/9424.ttf); 
+}
+@font-face {
+font-family: Instagram-2;
+src: url(../fonts/3952.ttf); 
+}
+@font-face {
+font-family: Pacifico; 
+src: url(../fonts/Pacifico.ttf); 
+}
+@font-face {
+font-family: Raleway; 
+src: url(../fonts/Raleway-Light.ttf); 
+}
   
 .site-name ,.footer-site-name{
     font-family: Instagram-1;
-    font-weight: 300;
+    font-weight: 100; 
     letter-spacing: 2px;
     display: inline-block;
     font-size: 32px;
@@ -81,6 +81,7 @@ header{
 }
 .postInfo b {
     font-family: Instagram-2;
+
     font-weight: 100;    
     transform: scaleX(1.2);
     margin-left: 1%;
@@ -88,18 +89,31 @@ header{
 }
 .postInfo date{
     font-family: Instagram-2;
-    font-weight: 100;    
+    font-weight:bold; 
     transform: scaleX(1.2);
     margin-top: 8px;
     margin-right: 1%;
 }
 .user-name{
     font-family: Instagram-2;
+    font-weight: 100; 
     transform: scaleX(1.2);
     margin-left: 48%;
     margin-top: 12px;
     /*display: inline-block;*/
     display: none;
+}
+.inp-user{
+    font-family: Instagram-2;
+    margin-left: 50px;
+}
+.current-date{
+    margin-right: 106px;
+    height: 20px;
+    width: 144px;
+    font-size: 12px;
+    font-family: Instagram-2;
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
 }
 
 .like{
@@ -137,6 +151,7 @@ header{
 }
 .likes-count{
     font-family:Instagram-2;
+    font-weight: 100; 
     display: inline-block;
     margin-left: 5px;
     
@@ -152,20 +167,16 @@ header{
     margin-top: 5px;
     box-shadow: 1px 1px 2px 1px rgba(0,0,0,.25)
 }
-/*.add-post:hover,#filter:hover,#show-more:hover,.description-button:hover,.log-out:hover { 
-    background: linear-gradient(rgb(177, 170, 170), rgb(39, 37, 37)) rgb(243, 243, 243);
-}*/
 .site-name:hover{
     color: rgb(136, 136, 136);
 }
-#filter{
-   
+.filter{
     display: inline-block;
     margin-top:25px;
     margin-right: 10%; 
-    border-radius: 14px;
     box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
-    font-size: 16px;
+    font-size: 13px;
+    border-radius: 2px;
 }
 .sign-in{
     margin-top:5px;
@@ -185,6 +196,7 @@ header{
     margin-top: 40px;
     margin-bottom: 40px;
     font-family: Instagram-2;
+    font-weight: 100; 
 }
 
 .tags-block{
@@ -195,15 +207,9 @@ header{
     display: inline;
 }
 .description-button{
-    cursor: pointer;
-    
+    cursor: pointer;   
     border-radius: 50%;
-
-    box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);/*,
-    inset 0 2px 0 rgba(255,255,255,.6),
-    0 2px 0 rgba(0,0,0,.1),
-    inset 0 0 20px rgba(0,0,0,.1);*/
-
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
 }
 .search-form {
     width: 131px;
@@ -211,17 +217,15 @@ header{
     height: 23px;
     position: relative;
   }
-  
   .search-form input {
     border: none;
   }
   .search-form .input {
-
     width: 100%;
     padding: 8px 37px 9px 15px;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    border-radius: 20px;
+    border-radius: 2px;
     box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
     font: 13px Tahoma, Arial, sans-serif;
     outline: none;
@@ -237,32 +241,87 @@ header{
     right: 0;
     width: 37px;
     height: 100%;
+    
     cursor: pointer;
     background: url(https://lh4.googleusercontent.com/-b-5aBxcxarY/UAfFW9lVyjI/AAAAAAAABUg/gQtEXuPuIds/s13/go.png) 50% no-repeat;
     opacity: 0.5;
   }
-  
-  
   .search-form .submit:hover {
     opacity: 0.8;
   }
-  
-  
   input[type="search-form"] {
     -webkit-appearance: none;
   }
 .sign-in span{
-    font-family: Instagram-2;
+    font-family:  Instagram-2;
+    font-weight: 100; 
     color: #000;
 }
-
-#filter span{
-    font-family: Instagram-2;
+.filter span{
+    font-family:  Instagram-2;
+    font-size: 12px; 
+    font-weight: 100; 
     color: #000;
 }
 main{
     display: flex;
     justify-content: flex-start;
+    display: relative;
+}
+.add-post-form{
+    display: none;
+    z-index: 10;
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
+    width: 450px;
+    height: 385px;
+    position:absolute;
+    background: #ffffff;
+    left:35%;
+    top:108px;
+}
+.add-post-form div{
+    display: flex;
+    margin-top: 15px;
+    justify-content: space-between;
+}
+.dragndrop{
+    margin-top: 1px!important;
+    margin-left: 70px;
+    width: 270px;
+    height: 40px;
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
+}
+.dragndrop-text{
+    display: block!important;
+    margin-bottom: 0;
+}
+.add-post-form input{
+    margin-top: 11px;
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
+    margin-right: 106px;
+    height: 19px;
+    width: 142px;
+}
+.add-post-form p{
+    display: initial;
+    margin-top: 10px;
+    margin-left: 70px;
+    font-family: Instagram-2;
+}
+.add-post-form button{
+    display: block;
+    margin-left: 190px;
+    margin-top: 30px;
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
+    font-size: 16px;
+    font-family: Instagram-2;
+    font-weight: 100; 
+    
+}
+.add-post-form textarea{
+    margin-right: 106px;
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
+    border-color: white;
 }
 #wrapper{
     margin-top: 10px;
@@ -313,10 +372,11 @@ main{
     outline-color: rgb(255, 255, 255);
     outline-width: medium;
 }
-#filter{
+.filter{
     margin-top: 25px;
-    width: 131px;
-    height: 30px;
+    margin-left: 25px;
+    width: 80px;
+    height: 34px;
 }
 .like{
     background-color: rgb(255, 255, 255);
@@ -375,6 +435,7 @@ footer .site-name{
 footer a{
     display: block;
     font-family: Instagram-2;
+    font-weight: 100; 
     color: rgb(117, 111, 111);
 }
 .is-auth .user-name{
@@ -400,4 +461,85 @@ footer a{
 }
 .is-auth .post{
     height: 785px;
+}
+.filter-form{
+    display: none;
+    margin-top: 5px;
+    box-shadow: 0 3px 20px rgba(0,0,0,.25);
+    width: 133px;
+    height: 115px;
+    border-radius: 2px;
+}
+.filter-form p{
+    display: inline;
+    margin-top: 5px;
+    margin-left: 15px;
+    font-family: Instagram-2;
+    font-weight: 100; 
+}
+.date-input{
+    margin-left: 5px;
+    font-size: 11px;
+    font-family: Instagram-2;
+    font-weight: 100; 
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
+    border-radius: 2px;
+}
+.filter-button-confirm,.filter-button-reset{
+    margin-left: 5px;
+    margin-top: 5px;
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
+    border-radius: 2px;
+    font-family: Instagram-2
+    ;
+    font-weight: 100; 
+}
+.filter-button-confirm{
+    margin-left: 29px;
+}
+.authorization-form{
+    display: none;
+    width: 290px;
+    height: 185px;
+    position:absolute;
+    background: #ffffff;
+    left:40%;
+    top:200px;
+}
+.authorization-form p {
+    display: inline-flex;
+    margin-left: 20px;
+}
+.authorization-form input{
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
+    margin-right: 40px;
+    height: 15px;
+    margin-top: 15px;
+}
+.authorization-form button{
+    display: block;
+    margin-left: 122px;
+    margin-top: 10px;
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
+    font-size: 16px;
+    font-family: Instagram-2;
+    font-weight: 100; 
+}
+.authorization-form  div{
+    display: flex;
+    margin-top: 15px;
+    justify-content: space-between;
+}
+.add-post-form  form
+{
+    margin-top: 25px;
+    margin-left: 70px;
+    width: 275px;
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
+}
+.add-post-form  form input{
+    width: 200px;
+    margin-left: 30px;
+    margin-right: 0;
+    box-shadow: 0 1px 1px 1px rgba(255, 255, 255, 0.25);
 }

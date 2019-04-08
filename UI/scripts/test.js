@@ -155,7 +155,8 @@ function viewMvcTest() {
 
   const wrapper = document.querySelector('#wrapper');
   const view = new View(wrapper, photoPosts);
-  view.setAuthorized();
+  const user = new User('glebek2h');
+  view.setAuthorized(user);
   view.showPosts();
 
   // view.addPost(new PhotoPost('10', 'Hac1kerman image of the character HACKERMAN from the 2015 film Kung Fury that is used in jokes regarding a persons inflated sense of self-esteem when they solve a simple technical issue. ', new Date('2017-02-23T23:00:00'), 'hackerman', 'images/6.jpg', ['#hackerman', '#hacks', '#hacker'], ['lol', 'kek']));
@@ -171,6 +172,9 @@ function viewMvcTest() {
 
   // mvc.presets();
   showMorePosts(photoPosts, view);
+  addAllListeners(view, wrapper, user);
+  signInFormLoginLogic(view, user);
+  addPostFormLogic(view, user);
 }
 // test();
 viewMvcTest();

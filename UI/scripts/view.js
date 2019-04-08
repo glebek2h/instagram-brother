@@ -1,3 +1,4 @@
+
 class User {
   constructor(name) {
     this.name = name;
@@ -13,7 +14,7 @@ class View {
   buildPost(post) {
     if (this.photoPosts.addPhotoPost(post)) {
       const postNode = this.getNodeWithHtml(post);
-      thiw.wrapper.insertAdjacentElement('afterbegin', postNode);
+      this.wrapper.insertAdjacentElement('afterbegin', postNode);
       return true;
     }
     return false;
@@ -63,7 +64,6 @@ class View {
     const fragment = document.importNode(template.content, true);
     const postNode = fragment.firstElementChild;
     const likesCount = post.likes.length;
-    let descriptionTag;
     const placeholders = postNode.querySelectorAll('[data-target]');
     [].forEach.call(placeholders || [], (phElement) => {
       const key = phElement.getAttribute('data-target');
@@ -75,11 +75,12 @@ class View {
         phElement.textContent = `${likesCount} likes`;
       } else if (key === 'description') {
         phElement.textContent = post[key].substring(0, 76);
-        descriptionTag = phElement;
       } else { phElement.textContent = post[key]; }
     });
     const tagsBlock = postNode.querySelector('.tags-block');
     postNode.dataset.id = post.id;
+    postNode.dataset.likesCount = likesCount;
+    postNode.dataset.description = post.description;
     tagsBlock.innerHTML = post.hashtags.map(
       tag => `<li class="tag"><a href="" >${tag}</a></li>`
     ).join('');

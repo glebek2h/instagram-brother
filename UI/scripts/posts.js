@@ -5,6 +5,9 @@
 const defaultFilterConfig = {
   _dateFrom: new Date(-8640000000000000), _dateTo: new Date(8640000000000000), author: '', hashtags: [],
 };
+const dateConfig = {
+  year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',
+};
 
 class PhotoPost {
   constructor(id, description, createdAt, author, photolink, tags = [], likes = []) {
