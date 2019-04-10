@@ -6,14 +6,15 @@ class User {
 }
 
 class View {
-  constructor(wrapper, model) {
+  constructor(wrapper, model, user) {
     this.photoPosts = model;
     this.wrapper = wrapper;
+    this.user = user;
   }
 
-  buildPost(post) {
+  addPost(post) {
     if (this.photoPosts.addPhotoPost(post)) {
-      const postNode = this.getNodeWithHtml(post);
+      const postNode = View.buildPost(post);
       this.wrapper.insertAdjacentElement('afterbegin', postNode);
       return true;
     }
@@ -35,7 +36,7 @@ class View {
     if (this.photoPosts.editPhotoPost(id, edits)) {
       const childNode = document.querySelector(`[data-id="${id}"]`);
       if (childNode) {
-        const editedChildNode = this.getNodeWithHtml(this.photoPosts.getPhotoPost(id));
+        const editedChildNode = View.buildPost(this.photoPosts.getPhotoPost(id));
         childNode.parentNode.replaceChild(editedChildNode, childNode);
       }
       return true;
@@ -45,7 +46,7 @@ class View {
 
   showPosts(skip = 0, top = 10, filterConfig = defaultFilterConfig) {
     this.photoPosts.getPhotoPosts(skip, top, filterConfig).forEach((post) => {
-      const postNode = this.getNodeWithHtml(post);
+      const postNode = View.buildPost(post);
       this.wrapper.insertAdjacentElement('beforeend', postNode);
     });
   }
@@ -54,12 +55,14 @@ class View {
     if (user instanceof User) {
       document.body.classList.toggle('is-auth', true);
       document.querySelector('.user-name').textContent = user.name;
+      this.user = user;
     } else {
       document.body.classList.toggle('is-auth', false);
+      this.user = undefined;
     }
   }
 
-  getNodeWithHtml(post) {
+  static buildPost(post) {
     const template = document.getElementById('post-template');
     const fragment = document.importNode(template.content, true);
     const postNode = fragment.firstElementChild;
@@ -81,6 +84,7 @@ class View {
     postNode.dataset.id = post.id;
     postNode.dataset.likesCount = likesCount;
     postNode.dataset.description = post.description;
+    postNode.dataset.author = post.author;
     tagsBlock.innerHTML = post.hashtags.map(
       tag => `<li class="tag"><a href="" >${tag}</a></li>`
     ).join('');

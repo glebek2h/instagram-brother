@@ -11,31 +11,25 @@
 <body>
     <header>
         <h1 class = "site-name"> glebogram </h1>
-        <button class="add-post"><i class="fas fa-plus fa-2x"></i></button>
+        <button data-action="add-post" class="add-post"><i class="fas fa-plus fa-2x"></i></button>
         <div class = "user-name"></div>
-        <button class = "log-out"><i class="fas fa-sign-out-alt fa-2x"></i></button>
-        <button class = "sign-in"><span class="sign-in-span">sign in</span></button>
+        <button data-action="log-out" class = "log-out"><i class="fas fa-sign-out-alt fa-2x"></i></button>
+        <button data-action="sign-in" class = "sign-in"><span class="sign-in-span">sign in</span></button>
     </header>
     <main>
-        <div class="add-post-form">
-            <!--<p class="dragndrop-text">dragndrop</p><input type="file" name="f">
-            <div class="dragndrop"></div>-->
-            <form enctype="multipart/form-data" method="post">
-                <input type="file" name="photo" multiple accept="image/*,image/jpeg">
-                <!--<input type="submit" value="Отправить">-->
-            </form>
-            
+        <form class="add-post-form">
+            <input type="file" name="photo" multiple accept="image/*,image/jpeg">
             <div><p>user_name</p><input type = "text" placeholder="" class="inp-user" readonly></div>    
             <div><p>current_date</p><div class="current-date"></div></div>
-            <div><p>hashtags</p><textarea class="add-post-form-tags" name="text"></textarea> </div>   
-            <div><p>photo description</p><textarea class="add-post-form-des" name = "text"></textarea></div>
+            <div><p>hashtags</p><textarea name="tags" class="add-post-form-tags" name="text"></textarea> </div>   
+            <div><p>photo description</p><textarea name="desc"  class="add-post-form-des" name = "text"></textarea></div>
             <button class="continue">continue</button>  
-        </div>
-        <div class="authorization-form">
-            <div><p>login</p> <input class="input-login" type = "text"></div>    
-            <div><p>password</p> <input class="input-password" type = "text"></div>
+        </form>
+        <form class="authorization-form">
+            <div><p>login</p><input class="input-login" type = "text"></div>    
+            <div><p>password</p><input class="input-password" type = "text"></div>
             <button class="login-auth">login</button>  
-        </div> 
+        </form> 
         <div id = "wrapper"> 
             <!--Here will be our posts-->
             <template id="post-template">
@@ -47,13 +41,13 @@
                         <img data-target="photolink"  alt="1" width="640" height="640">
                     </div>
                     <div class = "description">
-                        <button class="like" ><i class="far fa-thumbs-up fa-2x"></i></button><p class="likes-count" data-target="likes"></p>
-                        <button class="edit-post"><i class="far fa-edit fa-2x"></i></button>
-                        <button class="delete-post"><i class="far fa-trash-alt fa-2x"></i></button>
+                        <button data-action="like" class="like-btn" ><i class="far fa-thumbs-up fa-2x"></i></button><p class="likes-count" data-target="likes"></p>
+                        <button data-action="edit" class="edit-post-btn"><i class="far fa-edit fa-2x"></i></button>
+                        <button data-action="delete" class="delete-post-btn"><i class="far fa-trash-alt fa-2x"></i></button>
                         <span class="text-description">
                             <b data-target="author"></b>
                             <div data-target="description"></div>
-                            <button class="description-button">...</button><br> 
+                            <button data-action="show-more-desc" class="description-button">...</button><br> 
                         </span>
                         <ul class="tags-block">
                         </ul>  
@@ -62,11 +56,11 @@
             </template>
         </div>
         <aside id = "sidebar">
-            <form action="javascript:alert('filter')" method="post" class="search-form">
+            <form action="javascript:alert('filter')" class="search-form">
                 <input type="search" name="name" placeholder="search" class="input"/>
                 <button type="submit" class="submit"></button>
             </form>
-            <button class = "filter"><span class = "filter-span">filter by date</span> </button>
+            <button data-action="filter!" class = "filter"><span class = "filter-span">filter by date</span> </button>
             <form class="filter-form">
                 <p>from </p><input class="date-input" type="date" value="1999-12-22">
                 <p><br>to </p><input class="date-input" type="date" value="2019-04-04">
@@ -85,7 +79,6 @@
             <a href = "mailto: raul221299@gmail.com">raul221299@gmail.com</a> 
         </p>  
     </footer>
-    <script type="text/javascript" src="scripts/data.json"></script>
     <script src="scripts/posts.js"></script>
     <script src="scripts/view.js"></script>
     <script src="scripts/MVC.js"></script>

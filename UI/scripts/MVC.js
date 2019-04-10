@@ -1,10 +1,12 @@
+
+const users = [{ login: 'glebek2h', password: '221299' }, { login: 'kasper', password: 'kasper' }, { login: '1', password: '1' }];
+
 function randomInteger(min, max) {
   let rand = min - 0.5 + Math.random() * (max - min + 1);
   rand = Math.round(rand);
   return rand;
 }
-
-function showMorePosts(photoPosts, view) {
+function showMorePosts(view) {
   const button = document.querySelector('#show-more');
   let count = 0;
   button.addEventListener('click', () => {
@@ -12,34 +14,25 @@ function showMorePosts(photoPosts, view) {
     view.showPosts(count);
   });
 }
-
-function likeHandling(event) {
-  let likeNode;
-  event.target.className === 'far fa-thumbs-up fa-2x' ? likeNode = event.target.closest('.like') : likeNode = event.target;
-  const postNode = likeNode.closest('.post');
-  if (!likeNode.dataset.liked) { likeNode.dataset.liked = '0'; }
-  if (likeNode.dataset.liked === '0') {
-    likeNode.dataset.liked = '1';
-    postNode.querySelector('.likes-count').textContent = `${+postNode.dataset.likesCount + 1} likes`;
-    likeNode.style.backgroundColor = 'red';
+function likeHandling(realTarget, post) {
+  if (!realTarget.dataset.liked) { realTarget.dataset.liked = '0'; }
+  if (realTarget.dataset.liked === '0') {
+    realTarget.dataset.liked = '1';
+    post.querySelector('.likes-count').textContent = `${+post.dataset.likesCount + 1} likes`;
+    realTarget.style.backgroundColor = 'red';// css
   } else {
-    likeNode.dataset.liked = '0';
-    postNode.querySelector('.likes-count').textContent = `${postNode.dataset.likesCount} likes`;
-    likeNode.style.backgroundColor = 'white';
+    realTarget.dataset.liked = '0';
+    post.querySelector('.likes-count').textContent = `${post.dataset.likesCount} likes`;
+    realTarget.style.backgroundColor = 'white';// css
   }
 }
-
-function descriptionButtonHandling(event, user) {
-  const descriptionTag = event.target.previousSibling;
-  const postNode = event.target.closest('.post');
-  descriptionTag.textContent = postNode.dataset.description.substring(76, 200);
-  postNode.querySelector('.description-button').style.display = 'none';
-  user instanceof User ? postNode.style.height = '815px' : postNode.style.height = '795px';
+function descriptionButtonHandling(realTarget, post) {
+  const descriptionTag = realTarget.previousSibling.previousSibling;
+  descriptionTag.textContent = post.dataset.description.substring(0, 200);
+  realTarget.style.display = 'none';
 }
 
-function signInButtonHandling(event) {
-  let signInButton;
-  event.target.className === 'sign-in-span' ? signInButton = event.target.closest('.sign-in') : signInButton = event.target;
+function signInButtonHandling(signInButton) {
   if (!signInButton.dataset.clicked)signInButton.dataset.clicked = '0';
   if (signInButton.dataset.clicked === '0') {
     signInButton.dataset.clicked = '1';
@@ -49,48 +42,19 @@ function signInButtonHandling(event) {
     document.querySelector('.authorization-form').style.display = 'none';
   }
 }
-
-function signInFormLoginLogic(view, user) {
-  const inputLogin = document.querySelector('.input-login');
-  const inputPassword = document.querySelector('.input-password');
-  const loginButton = document.querySelector('.login-auth');
-  const Users = JSON.parse(users);
-  const object = { login: '', password: '' };
-  inputLogin.oninput = function () {
-    object.login = inputLogin.value;
-  };
-  inputPassword.oninput = function () {
-    object.password = inputPassword.value;
-  };
-  loginButton.onclick = function () {
-    const objectString = JSON.stringify(object);
-    localStorage.setItem('object-input', objectString);
-    // user = new User(`${object.login}`);// //////////////bug
-    Users.find(el => JSON.stringify(el) === JSON.stringify(object)) ? view.setAuthorized(new User(`${object.login}`)) : console.log('NO');
-    document.querySelector('.authorization-form').style.display = 'none';
-  };
-}
-
-function filterButtonHandling(event) {
-  if (event.target.className === 'filter' || event.target.className === 'filter-span') {
-    let filterButton;
-    event.target.className === 'filter-span' ? filterButton = event.target.closest('.filter') : filterButton = event.target;
-    if (!filterButton.dataset.clicked)filterButton.dataset.clicked = '0';
-    if (filterButton.dataset.clicked === '0') {
-      filterButton.dataset.clicked = '1';
-      filterButton.nextSibling.nextSibling.style.display = 'block';
-    } else {
-      filterButton.dataset.clicked = '0';
-      filterButton.nextSibling.nextSibling.style.display = 'none';
-    }
+function filterButtonHandling(filterButton) {
+  if (!filterButton.dataset.clicked)filterButton.dataset.clicked = '0';
+  if (filterButton.dataset.clicked === '0') {
+    filterButton.dataset.clicked = '1';
+    filterButton.nextSibling.nextSibling.style.display = 'block';
+  } else {
+    filterButton.dataset.clicked = '0';
+    filterButton.nextSibling.nextSibling.style.display = 'none';
   }
 }
-
-function addPostButtonHandling(event, user) {
-  let addPostButton;
-  event.target.className === 'as fa-plus fa-2x' ? addPostButton = event.target.closest('.add-post') : addPostButton = event.target;
+function addPostButtonHandling(addPostButton, view) {
   if (!addPostButton.dataset.clicked)addPostButton.dataset.clicked = '0';
-  document.querySelector('.add-post-form').querySelector('.inp-user').placeholder = `   ${user.name}`;
+  document.querySelector('.add-post-form').querySelector('.inp-user').placeholder = `   ${view.user.name}`;
   document.querySelector('.current-date').textContent = `   ${new Date().toLocaleString('en-US', dateConfig)}`;
   if (addPostButton.dataset.clicked === '0') {
     addPostButton.dataset.clicked = '1';
@@ -100,82 +64,153 @@ function addPostButtonHandling(event, user) {
     document.querySelector('.add-post-form').style.display = 'none';
   }
 }
-
-function addPostFormLogic(view, user, postId) { // 3rd argument for edit state
-  const form = document.querySelector('.add-post-form form');
+function editPostButtonHandling(realTarget, view) {
+  if (!realTarget.dataset.clicked)realTarget.dataset.clicked = '0';
+  document.querySelector('.add-post-form').querySelector('.inp-user').placeholder = `   ${view.user.name}`;
+  document.querySelector('.current-date').textContent = `   ${new Date().toLocaleString('en-US', dateConfig)}`;
+  if (realTarget.dataset.clicked === '0') {
+    realTarget.dataset.clicked = '1';
+    document.querySelector('.add-post-form').style.display = 'block';
+  } else {
+    realTarget.dataset.clicked = '0';
+    document.querySelector('.add-post-form').style.display = 'none';
+  }
+}
+function addHeaderListener(view, header) {
+  const form = document.querySelector('.add-post-form');
   const inputPhoto = form.firstChild.nextSibling;
   const inputTags = document.querySelector('.add-post-form-tags');
   const inputDescription = document.querySelector('.add-post-form-des');
-  const post = new PhotoPost();
-  post.author = user.name;
-  post.id = randomInteger(100, 1000);
-  post.likes = [];
-  post.hashtags = [];
-  post.createdAt = new Date().toLocaleString('en-US', dateConfig);
-  inputPhoto.oninput = function () {
-    post.photolink = `images/${inputPhoto.files[0].name}`;
-  };
-  inputTags.onchange = function () {
-    const tagsArray = inputTags.value.split('#');
-    tagsArray.forEach((tag) => {
-      if (tag.length !== 0) { post.hashtags.push(`#${tag}`); }
-    });
-  };
-  inputDescription.onchange = function () {
-    post.description = inputDescription.value;
-  };
-  document.querySelector('.continue').onclick = function () {
-    document.querySelector('.add-post-form').style.display = 'none';
-    postId ? view.editPost(postId, post) : view.buildPost(post);
-  };
+  header.addEventListener('click', (event) => {
+    const realTarget = event.target.closest('[data-action]');
+    const { action } = realTarget.dataset;
+    switch (action) {
+      case 'add-post':
+        // event.preventDefault();
+        addPostButtonHandling(realTarget, view);
+        const post = new PhotoPost();
+        post.id = `${randomInteger(1000, 10000)}`;
+        post.likes = [];
+        post.hashtags = [];
+        inputPhoto.oninput = function () {
+          post.photolink = `images/${inputPhoto.files[0].name}`;
+        };
+        inputTags.onchange = function () {
+          const tagsArray = inputTags.value.split('#');
+          tagsArray.forEach((tag) => {
+            if (tag.length !== 0) { post.hashtags.push(`#${tag}`); }
+          });
+        };
+        inputDescription.onchange = function () {
+          post.description = inputDescription.value;
+        };
+        document.querySelector('.continue').onclick = function () {
+          document.querySelector('.add-post-form').style.display = 'none';
+          post.author = view.user.name;
+          post.createdAt = new Date().toLocaleString('en-US', dateConfig);
+          view.addPost(post);
+          return false;
+        };
+        realTarget.dataset.clicked = '0';
+        inputPhoto.value = '';
+        inputTags.value = '';
+        inputDescription.value = '';
+        break;
+      case 'log-out':
+        view.setAuthorized();
+        break;
+      case 'sign-in':
+        signInButtonHandling(realTarget);
+        realTarget.dataset.clicked = '0';
+        break;
+      default:
+    }
+  });
 }
-
-function editPostButtonHandling(event, user) {
-  let editPostButton;
-  event.target.className === 'far fa-edit fa-2x' ? editPostButton = event.target.closest('.edit-post') : editPostButton = event.target;
-  if (!editPostButton.dataset.clicked)editPostButton.dataset.clicked = '0';
-  document.querySelector('.add-post-form').querySelector('.inp-user').placeholder = `   ${user.name}`;
-  document.querySelector('.current-date').textContent = `   ${new Date().toLocaleString('en-US', dateConfig)}`;
-  if (editPostButton.dataset.clicked === '0') {
-    editPostButton.dataset.clicked = '1';
-    document.querySelector('.add-post-form').style.display = 'block';
-  } else {
-    editPostButton.dataset.clicked = '0';
-    document.querySelector('.add-post-form').style.display = 'none';
-  }
-  return editPostButton.closest('.post').dataset.id;
-}
-
-function addAllListeners(view, wrapper, user) {
-  let postID;// needed for post editing
+function addWrapperListener(view, wrapper) {
+  const form = document.querySelector('.add-post-form');
+  const inputPhoto = form.firstChild.nextSibling;
+  const inputTags = document.querySelector('.add-post-form-tags');
+  const inputDescription = document.querySelector('.add-post-form-des');
   wrapper.addEventListener('click', (event) => {
-    if (event.target.className === 'like' || event.target.className === 'far fa-thumbs-up fa-2x') {
-      likeHandling(event);
-    }
-    if (event.target.className === 'description-button') {
-      descriptionButtonHandling(event, user);
-    }
-    if (event.target.className === 'delete-post' || event.target.className === 'far fa-trash-alt fa-2x') {
-      view.deletePost(event.target.closest('.post').dataset.id);
-    }
-    if (event.target.className === 'edit-post' || event.target.className === 'far fa-edit fa-2x') {
-      postID = editPostButtonHandling(event, user);
-      console.log(postID);
-      addPostFormLogic(view, user, postID);
+    const realTarget = event.target.closest('[data-action]');
+    const post = realTarget.closest('.post');
+    const { action } = realTarget.dataset;
+    switch (action) {
+      case 'like':
+        likeHandling(realTarget, post);
+        break;
+      case 'edit':
+        // event.preventDefault();
+        if (post.dataset.author === view.user.name) {
+          editPostButtonHandling(realTarget, view);
+          const edits = {};
+          edits.id = randomInteger(1000, 10000);
+          edits.likes = [];
+          edits.hashtags = [];
+          inputPhoto.oninput = function () {
+            edits.photolink = `images/${inputPhoto.files[0].name}`;
+          };
+          inputTags.onchange = function () {
+            const tagsArray = inputTags.value.split('#');
+            tagsArray.forEach((tag) => {
+              if (tag.length !== 0) { edits.hashtags.push(`#${tag}`); }
+            });
+          };
+          inputDescription.onchange = function () {
+            edits.description = inputDescription.value;
+          };
+          document.querySelector('.continue').onclick = function () {
+            document.querySelector('.add-post-form').style.display = 'none';
+            edits.author = view.user.name;
+            edits.createdAt = new Date().toLocaleString('en-US', dateConfig);
+            view.editPost(post.dataset.id, edits);
+            return false;
+          };
+          realTarget.dataset.clicked = '0';
+          inputPhoto.value = '';
+          inputTags.value = '';
+          inputDescription.value = '';
+        }
+        break;
+      case 'delete':
+        if (post.dataset.author === view.user.name) {
+          view.deletePost(post.dataset.id);
+        }
+        break;
+      case 'show-more-desc':
+        descriptionButtonHandling(realTarget, post);
+        break;
+      default:
     }
   });
-  document.querySelector('header').addEventListener('click', (event) => {
-    if (event.target.className === 'log-out' || event.target.className === 'fas fa-sign-out-alt fa-2x') {
-      view.setAuthorized();
-    }
-    if (event.target.className === 'sign-in' || event.target.className === 'sign-in-span') {
-      signInButtonHandling(event);
-    }
-    if (event.target.className === 'add-post' || event.target.className === 'fas fa-plus fa-2x') {
-      addPostButtonHandling(event, user);
+}
+function addSideBarListener(sidebar) {
+  sidebar.addEventListener('click', (event) => {
+    // event.preventDefault();
+    const realTarget = event.target.closest('[data-action]');
+    const { action } = realTarget.dataset;
+    if (action === 'filter!') {
+      filterButtonHandling(realTarget);
     }
   });
-  document.querySelector('#sidebar').addEventListener('click', (event) => {
-    filterButtonHandling(event);
-  });
+}
+function signInFormLoginLogic(view) {
+  const inputLogin = document.querySelector('.input-login');
+  const inputPassword = document.querySelector('.input-password');
+  const loginButton = document.querySelector('.login-auth');
+  const object = { login: '', password: '' };
+  inputLogin.oninput = function () {
+    object.login = inputLogin.value;
+  };
+  inputPassword.oninput = function () {
+    object.password = inputPassword.value;
+  };
+  loginButton.onclick = function () {
+    localStorage.setItem('object-input', JSON.stringify(object));
+    users.find(el => JSON.stringify(el) === JSON.stringify(object))
+      ? view.setAuthorized(new User(object.login)) : view.setAuthorized();
+    document.querySelector('.authorization-form').style.display = 'none';
+    return false;
+  };
 }
