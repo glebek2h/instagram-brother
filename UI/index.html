@@ -11,10 +11,10 @@
 <body>
     <header>
         <h1 class = "site-name"> glebogram </h1>
-        <button data-action="add-post" class="add-post"><i class="fas fa-plus fa-2x"></i></button>
+        <button data-action="add-post" class="add-post-btn"><i class="fas fa-plus fa-2x"></i></button>
         <div class = "user-name"></div>
-        <button data-action="log-out" class = "log-out"><i class="fas fa-sign-out-alt fa-2x"></i></button>
-        <button data-action="sign-in" class = "sign-in"><span class="sign-in-span">sign in</span></button>
+        <button data-action="log-out" class = "log-out-btn"><i class="fas fa-sign-out-alt fa-2x"></i></button>
+        <button data-action="sign-in" class = "sign-in-btn"><span class="sign-in-span">sign in</span></button>
     </header>
     <main>
         <form class="add-post-form">
@@ -41,9 +41,10 @@
                         <img data-target="photolink"  alt="1" width="640" height="640">
                     </div>
                     <div class = "description">
-                        <button data-action="like" class="like-btn" ><i class="far fa-thumbs-up fa-2x"></i></button><p class="likes-count" data-target="likes"></p>
+                        <button data-action="like" class="like-btn" ><span><i class="far fa-thumbs-up fa-2x"></span></i></button>
                         <button data-action="edit" class="edit-post-btn"><i class="far fa-edit fa-2x"></i></button>
                         <button data-action="delete" class="delete-post-btn"><i class="far fa-trash-alt fa-2x"></i></button>
+                        <p class="likes-count" data-target="likes"></p>
                         <span class="text-description">
                             <b data-target="author"></b>
                             <div data-target="description"></div>
@@ -62,8 +63,8 @@
             </form>
             <button data-action="filter!" class = "filter"><span class = "filter-span">filter by date</span> </button>
             <form class="filter-form">
-                <p>from </p><input class="date-input" type="date" value="1999-12-22">
-                <p><br>to </p><input class="date-input" type="date" value="2019-04-04">
+                <p>from </p><input class="date-input1" type="date" value="1999-12-22">
+                <p><br>to </p><input class="date-input2" type="date" value="2019-04-04">
                 <button class="filter-button-reset">reset</button>
                 <button class="filter-button-confirm">filter!</button>
             </form>   

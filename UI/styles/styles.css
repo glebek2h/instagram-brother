@@ -61,15 +61,11 @@ header{
 .description span div{
     display: inline;
 }
-.log-out{
+.log-out-btn{
     display: none;
-    margin-top:5px;
+    margin-top:12px;
+    height: 20px;
     margin-right: 10px;
-    box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
-    cursor: pointer;
-    border-radius: 50%;
-    width: 34px;
-    height: 34px;
     margin-left: 10px;
 }
 #user-pic{
@@ -116,56 +112,33 @@ header{
     box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
 }
 
-.like{
+.like-btn{
     display: none;
     margin-left: 5px;
-    width: 38px;
-    height: 38px;
-    cursor: pointer;
-    border-radius: 50%;
-    margin-top: 4px;
-
-  box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
+    margin-top: 1px;
 }
-.edit-post{
+.edit-post-btn{
     display: none;
-    margin-left: 30px;
-    width: 38px;
-    height: 38px;
-    cursor: pointer;
-    border-radius: 50%;
-    margin-top: 4px;
-
-  box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
+    margin-left: 40px;
+    margin-top: 1px;
 }
-.delete-post{
+.delete-post-btn{
     display: none;
-    margin-left: 30px;
-    width: 38px;
-    height: 38px;
-    cursor: pointer;
-    border-radius: 50%;
-    margin-top: 4px;
-
-  box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
+    margin-left: 40px;
+    margin-top: 1px;
 }
 .likes-count{
     font-family:Instagram-2;
     font-weight: 100; 
-    display: inline-block;
-    margin-left: 5px;
+    margin-left: 1px;
     
 }
-.add-post{
+.add-post-btn{
     display: none;
     /*display: inline-block;*/
-    margin-left: 8%;
-    width: 34px;
-    height: 34px;
-    cursor: pointer;
-    border-radius: 50px;
-    margin-top: 5px;
-    box-shadow: 1px 1px 2px 1px rgba(0,0,0,.25)
+    height: 20px;
+    margin-left: 1%;
+    margin-top: 13px;
 }
 .site-name:hover{
     color: rgb(136, 136, 136);
@@ -178,15 +151,11 @@ header{
     font-size: 13px;
     border-radius: 2px;
 }
-.sign-in{
-    margin-top:5px;
+.sign-in-btn{
+    margin-top:12px;
     margin-right: 10px;
+    height: 20px;
     margin-left: 70%;
-    box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
-    cursor: pointer;
-    border-radius: 50%;
-    width: 44px;
-    height: 43px;
 }
 #show-more{
     border-radius: 14px;
@@ -252,7 +221,7 @@ header{
   input[type="search-form"] {
     -webkit-appearance: none;
   }
-.sign-in span{
+.sign-in-btn span{
     font-family:  Instagram-2;
     font-weight: 100; 
     color: #000;
@@ -332,7 +301,7 @@ main{
     display: block;
     margin-top: 30px;
     border: 0 solid #000000;
-    height: 760px;
+    height: 755px;
     box-shadow: 0 3px 20px rgba(0,0,0,.25),
     inset 0 2px 0 rgba(255,255,255,.6);
  }
@@ -378,7 +347,7 @@ main{
     width: 80px;
     height: 34px;
 }
-.like{
+.like-btn{
     background-color: rgb(255, 255, 255);
 }
 @media screen and (max-width: 1770px){
@@ -441,22 +410,22 @@ footer a{
 .is-auth .user-name{
     display: inline-block;
 }
-.is-auth .add-post{
+.is-auth .add-post-btn{
     display: inline-block;
 }
-.is-auth .log-out{
+.is-auth .log-out-btn{
     display: inline-block;
 }
-.is-auth .like{
+.is-auth .like-btn{
     display : inline-block;
 }
-.is-auth .delete-post{
+.is-auth .delete-post-btn{
     display : inline-block;
 }
-.is-auth .edit-post{
+.is-auth .edit-post-btn{
     display : inline-block;
 }
-.is-auth .sign-in{
+.is-auth .sign-in-btn{
     display: none;
 }
 .is-auth .post{
@@ -496,6 +465,9 @@ footer a{
 }
 .filter-button-confirm{
     margin-left: 29px;
+}
+.like-btn span{
+    /*color: Tomato;*/
 }
 .authorization-form{
     display: none;

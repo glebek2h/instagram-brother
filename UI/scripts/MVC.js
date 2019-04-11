@@ -1,5 +1,5 @@
 
-const users = [{ login: 'glebek2h', password: '221299' }, { login: 'kasper', password: 'kasper' }, { login: '1', password: '1' }];
+const users = [{ login: 'glebek2h', password: '221299' }, { login: 'kasper', password: 'kasper' }, { login: '1', password: '1' }, { login: 'artyomcherepanov', password: 'byerak' }];
 
 function randomInteger(min, max) {
   let rand = min - 0.5 + Math.random() * (max - min + 1);
@@ -19,17 +19,18 @@ function likeHandling(realTarget, post) {
   if (realTarget.dataset.liked === '0') {
     realTarget.dataset.liked = '1';
     post.querySelector('.likes-count').textContent = `${+post.dataset.likesCount + 1} likes`;
-    realTarget.style.backgroundColor = 'red';// css
+    realTarget.firstChild.style.color = 'Tomato';// css
   } else {
     realTarget.dataset.liked = '0';
     post.querySelector('.likes-count').textContent = `${post.dataset.likesCount} likes`;
-    realTarget.style.backgroundColor = 'white';// css
+    realTarget.firstChild.style.color = 'black';// css
   }
 }
-function descriptionButtonHandling(realTarget, post) {
+function descriptionButtonHandling(realTarget, post, view) {
   const descriptionTag = realTarget.previousSibling.previousSibling;
   descriptionTag.textContent = post.dataset.description.substring(0, 200);
   realTarget.style.display = 'none';
+  view.user ? post.style.height = '815px' : post.style.height = '795px';
 }
 
 function signInButtonHandling(signInButton) {
@@ -134,64 +135,97 @@ function addWrapperListener(view, wrapper) {
   const inputDescription = document.querySelector('.add-post-form-des');
   wrapper.addEventListener('click', (event) => {
     const realTarget = event.target.closest('[data-action]');
-    const post = realTarget.closest('.post');
-    const { action } = realTarget.dataset;
-    switch (action) {
-      case 'like':
-        likeHandling(realTarget, post);
-        break;
-      case 'edit':
+    if (realTarget) {
+      const post = realTarget.closest('.post');
+      const { action } = realTarget.dataset;
+      switch (action) {
+        case 'like':
+          likeHandling(realTarget, post);
+          break;
+        case 'edit':
         // event.preventDefault();
-        if (post.dataset.author === view.user.name) {
-          editPostButtonHandling(realTarget, view);
-          const edits = {};
-          edits.id = randomInteger(1000, 10000);
-          edits.likes = [];
-          edits.hashtags = [];
-          inputPhoto.oninput = function () {
-            edits.photolink = `images/${inputPhoto.files[0].name}`;
-          };
-          inputTags.onchange = function () {
-            const tagsArray = inputTags.value.split('#');
-            tagsArray.forEach((tag) => {
-              if (tag.length !== 0) { edits.hashtags.push(`#${tag}`); }
-            });
-          };
-          inputDescription.onchange = function () {
-            edits.description = inputDescription.value;
-          };
-          document.querySelector('.continue').onclick = function () {
-            document.querySelector('.add-post-form').style.display = 'none';
-            edits.author = view.user.name;
-            edits.createdAt = new Date().toLocaleString('en-US', dateConfig);
-            view.editPost(post.dataset.id, edits);
-            return false;
-          };
-          realTarget.dataset.clicked = '0';
-          inputPhoto.value = '';
-          inputTags.value = '';
-          inputDescription.value = '';
-        }
-        break;
-      case 'delete':
-        if (post.dataset.author === view.user.name) {
-          view.deletePost(post.dataset.id);
-        }
-        break;
-      case 'show-more-desc':
-        descriptionButtonHandling(realTarget, post);
-        break;
-      default:
+          if (post.dataset.author === view.user.name) {
+            editPostButtonHandling(realTarget, view);
+            const edits = {};
+            edits.id = randomInteger(1000, 10000);
+            edits.likes = [];
+            edits.hashtags = [];
+            inputPhoto.oninput = function () {
+              edits.photolink = `images/${inputPhoto.files[0].name}`;
+            };
+            inputTags.onchange = function () {
+              const tagsArray = inputTags.value.split('#');
+              tagsArray.forEach((tag) => {
+                if (tag.length !== 0) { edits.hashtags.push(`#${tag}`); }
+              });
+            };
+            inputDescription.onchange = function () {
+              edits.description = inputDescription.value;
+            };
+            document.querySelector('.continue').onclick = function () {
+              document.querySelector('.add-post-form').style.display = 'none';
+              edits.author = view.user.name;
+              edits.createdAt = new Date().toLocaleString('en-US', dateConfig);
+              view.editPost(post.dataset.id, edits);
+              return false;
+            };
+            realTarget.dataset.clicked = '0';
+            inputPhoto.value = '';
+            inputTags.value = '';
+            inputDescription.value = '';
+          }
+          break;
+        case 'delete':
+          if (post.dataset.author === view.user.name) {
+            view.deletePost(post.dataset.id);
+          }
+          break;
+        case 'show-more-desc':
+          descriptionButtonHandling(realTarget, post, view);
+          break;
+        default:
+      }
     }
   });
 }
-function addSideBarListener(sidebar) {
+function filterFormLogic(view) {
+  const dateInputFrom = document.querySelector('.date-input1');
+  const dateInputTo = document.querySelector('.date-input2');
+  const resetButton = document.querySelector('.filter-button-reset');
+  const filterButton = document.querySelector('.filter-button-confirm');
+  const filterConfig = {};
+  dateInputFrom.onchange = function () {
+    filterConfig._dateFrom = new Date(dateInputFrom.value);
+  };
+  dateInputTo.onchange = function () {
+    filterConfig._dateTo = new Date(dateInputTo.value);
+  };
+  resetButton.onclick = function () {
+    dateInputFrom.value = '1999-12-22';
+    dateInputTo.value = '2019-04-04';
+    document.querySelector('.filter-form').style.display = 'none';
+    view.showPosts();
+    return false;
+  };
+  filterButton.onclick = function () {
+    document.querySelector('.filter-form').style.display = 'none';
+    const postTemplate = view.wrapper.querySelector('#post-template');
+    view.wrapper.textContent = '';
+    view.wrapper.insertAdjacentElement('beforeend', postTemplate);
+    view.showPosts(0, 10, filterConfig);
+    return false;
+  };
+}
+function addSideBarListener(view, sidebar) {
   sidebar.addEventListener('click', (event) => {
     // event.preventDefault();
     const realTarget = event.target.closest('[data-action]');
-    const { action } = realTarget.dataset;
-    if (action === 'filter!') {
-      filterButtonHandling(realTarget);
+    if (realTarget) {
+      const { action } = realTarget.dataset;
+      if (action === 'filter!') {
+        filterButtonHandling(realTarget);
+        filterFormLogic(view);
+      }
     }
   });
 }

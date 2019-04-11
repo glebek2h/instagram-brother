@@ -63,7 +63,7 @@ class View {
   }
 
   static buildPost(post) {
-    const template = document.getElementById('post-template');
+    const template = document.querySelector('#post-template');
     const fragment = document.importNode(template.content, true);
     const postNode = fragment.firstElementChild;
     const likesCount = post.likes.length;
