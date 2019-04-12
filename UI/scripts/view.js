@@ -85,6 +85,7 @@ class View {
     postNode.dataset.likesCount = likesCount;
     postNode.dataset.description = post.description;
     postNode.dataset.author = post.author;
+    postNode.dataset.tags = post.hashtags;
     tagsBlock.innerHTML = post.hashtags.map(
       tag => `<li class="tag"><a href="" >${tag}</a></li>`
     ).join('');

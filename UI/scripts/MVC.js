@@ -146,10 +146,14 @@ function addWrapperListener(view, wrapper) {
         // event.preventDefault();
           if (post.dataset.author === view.user.name) {
             editPostButtonHandling(realTarget, view);
+            // inputPhoto.value = post.dataset.link;
+            inputTags.value = post.dataset.tags;
+            inputDescription.value = post.dataset.description;
             const edits = {};
             edits.id = randomInteger(1000, 10000);
             edits.likes = [];
             edits.hashtags = [];
+
             inputPhoto.oninput = function () {
               edits.photolink = `images/${inputPhoto.files[0].name}`;
             };
@@ -170,9 +174,6 @@ function addWrapperListener(view, wrapper) {
               return false;
             };
             realTarget.dataset.clicked = '0';
-            inputPhoto.value = '';
-            inputTags.value = '';
-            inputDescription.value = '';
           }
           break;
         case 'delete':
@@ -204,6 +205,9 @@ function filterFormLogic(view) {
     dateInputFrom.value = '1999-12-22';
     dateInputTo.value = '2019-04-04';
     document.querySelector('.filter-form').style.display = 'none';
+    const postTemplate = view.wrapper.querySelector('#post-template');
+    view.wrapper.textContent = '';
+    view.wrapper.insertAdjacentElement('beforeend', postTemplate);
     view.showPosts();
     return false;
   };
@@ -213,6 +217,8 @@ function filterFormLogic(view) {
     view.wrapper.textContent = '';
     view.wrapper.insertAdjacentElement('beforeend', postTemplate);
     view.showPosts(0, 10, filterConfig);
+    dateInputFrom.value = '';
+    dateInputTo.value = '';
     return false;
   };
 }
@@ -225,9 +231,32 @@ function addSideBarListener(view, sidebar) {
       if (action === 'filter!') {
         filterButtonHandling(realTarget);
         filterFormLogic(view);
+        realTarget.dataset.clicked = '0';
       }
     }
   });
+  const searchInput = document.querySelector('.input');
+  const sumbitButton = document.querySelector('.submit');
+  let string;
+  searchInput.onchange = function () {
+    string = searchInput.value;
+  };
+  sumbitButton.onclick = function () { // realizing input to search form(take a look on mockup;)
+    const postTemplate = view.wrapper.querySelector('#post-template');
+    view.wrapper.textContent = '';
+    view.wrapper.insertAdjacentElement('beforeend', postTemplate);
+    const filterConfig = { hashtags: [] };
+    const words = string.split(' ');
+    const indexUserName = words.findIndex(el => el.charAt(0) !== '#');
+    if (indexUserName !== -1) {
+      filterConfig.author = words.splice(indexUserName, 1)[0];
+    }
+    words.forEach((tag) => {
+      if (tag.length !== 0) { filterConfig.hashtags.push(`${tag}`); }
+    });
+    view.showPosts(0, 10, filterConfig);
+    return false;
+  };
 }
 function signInFormLoginLogic(view) {
   const inputLogin = document.querySelector('.input-login');
