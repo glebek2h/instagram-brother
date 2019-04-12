@@ -11,7 +11,7 @@ function showMorePosts(view) {
   let count = 0;
   button.addEventListener('click', () => {
     count += 10;
-    view.showPosts(count);
+    view.showPosts(count, 10);
   });
 }
 function likeHandling(realTarget, post) {
@@ -84,47 +84,49 @@ function addHeaderListener(view, header) {
   const inputDescription = document.querySelector('.add-post-form-des');
   header.addEventListener('click', (event) => {
     const realTarget = event.target.closest('[data-action]');
-    const { action } = realTarget.dataset;
-    switch (action) {
-      case 'add-post':
+    if (realTarget) {
+      const { action } = realTarget.dataset;
+      switch (action) {
+        case 'add-post':
         // event.preventDefault();
-        addPostButtonHandling(realTarget, view);
-        const post = new PhotoPost();
-        post.id = `${randomInteger(1000, 10000)}`;
-        post.likes = [];
-        post.hashtags = [];
-        inputPhoto.oninput = function () {
-          post.photolink = `images/${inputPhoto.files[0].name}`;
-        };
-        inputTags.onchange = function () {
-          const tagsArray = inputTags.value.split('#');
-          tagsArray.forEach((tag) => {
-            if (tag.length !== 0) { post.hashtags.push(`#${tag}`); }
-          });
-        };
-        inputDescription.onchange = function () {
-          post.description = inputDescription.value;
-        };
-        document.querySelector('.continue').onclick = function () {
-          document.querySelector('.add-post-form').style.display = 'none';
-          post.author = view.user.name;
-          post.createdAt = new Date().toLocaleString('en-US', dateConfig);
-          view.addPost(post);
-          return false;
-        };
-        realTarget.dataset.clicked = '0';
-        inputPhoto.value = '';
-        inputTags.value = '';
-        inputDescription.value = '';
-        break;
-      case 'log-out':
-        view.setAuthorized();
-        break;
-      case 'sign-in':
-        signInButtonHandling(realTarget);
-        realTarget.dataset.clicked = '0';
-        break;
-      default:
+          addPostButtonHandling(realTarget, view);
+          const post = new PhotoPost();
+          post.id = `${randomInteger(1000, 10000)}`;
+          post.likes = [];
+          post.hashtags = [];
+          inputPhoto.oninput = function () {
+            post.photolink = `images/${inputPhoto.files[0].name}`;
+          };
+          inputTags.onchange = function () {
+            const tagsArray = inputTags.value.split('#');
+            tagsArray.forEach((tag) => {
+              if (tag.length !== 0) { post.hashtags.push(`#${tag}`); }
+            });
+          };
+          inputDescription.onchange = function () {
+            post.description = inputDescription.value;
+          };
+          document.querySelector('.continue').onclick = function () {
+            document.querySelector('.add-post-form').style.display = 'none';
+            post.author = view.user.name;
+            post.createdAt = new Date().toLocaleString('en-US', dateConfig);
+            view.addPost(post);
+            return false;
+          };
+          realTarget.dataset.clicked = '0';
+          inputPhoto.value = '';
+          inputTags.value = '';
+          inputDescription.value = '';
+          break;
+        case 'log-out':
+          view.setAuthorized();
+          break;
+        case 'sign-in':
+          signInButtonHandling(realTarget);
+          realTarget.dataset.clicked = '0';
+          break;
+        default:
+      }
     }
   });
 }
@@ -150,14 +152,13 @@ function addWrapperListener(view, wrapper) {
             inputTags.value = post.dataset.tags;
             inputDescription.value = post.dataset.description;
             const edits = {};
-            edits.id = randomInteger(1000, 10000);
+            edits.id = `${randomInteger(1000, 10000)}`;
             edits.likes = [];
-            edits.hashtags = [];
-
             inputPhoto.oninput = function () {
               edits.photolink = `images/${inputPhoto.files[0].name}`;
             };
             inputTags.onchange = function () {
+              edits.hashtags = [];
               const tagsArray = inputTags.value.split('#');
               tagsArray.forEach((tag) => {
                 if (tag.length !== 0) { edits.hashtags.push(`#${tag}`); }
@@ -217,8 +218,8 @@ function filterFormLogic(view) {
     view.wrapper.textContent = '';
     view.wrapper.insertAdjacentElement('beforeend', postTemplate);
     view.showPosts(0, 10, filterConfig);
-    dateInputFrom.value = '';
-    dateInputTo.value = '';
+    dateInputFrom.value = '1999-12-22';
+    dateInputTo.value = '2019-04-04';
     return false;
   };
 }
@@ -255,6 +256,7 @@ function addSideBarListener(view, sidebar) {
       if (tag.length !== 0) { filterConfig.hashtags.push(`${tag}`); }
     });
     view.showPosts(0, 10, filterConfig);
+    searchInput.value = '';
     return false;
   };
 }
@@ -270,7 +272,6 @@ function signInFormLoginLogic(view) {
     object.password = inputPassword.value;
   };
   loginButton.onclick = function () {
-    localStorage.setItem('object-input', JSON.stringify(object));
     users.find(el => JSON.stringify(el) === JSON.stringify(object))
       ? view.setAuthorized(new User(object.login)) : view.setAuthorized();
     document.querySelector('.authorization-form').style.display = 'none';

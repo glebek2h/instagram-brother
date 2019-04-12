@@ -13,7 +13,7 @@ class PhotoPost {
   constructor(id, description, createdAt, author, photolink, tags = [], likes = []) {
     this.id = id;
     this.description = description;
-    this.createdAt = new Date(createdAt);
+    this.createdAt = new Date(createdAt).toLocaleString('en-Us', dateConfig);
     this.author = author;
     this.photolink = photolink;
     this.hashtags = tags;
@@ -32,6 +32,23 @@ class PhotoPost {
 class PhotoPosts {
   constructor() {
     this._photoPosts = [];
+    this.restore();
+  }
+
+  save() {
+    localStorage.removeItem('posts');
+    const jsonPosts = JSON.stringify(this._photoPosts);
+    localStorage.setItem('posts', jsonPosts);
+  }
+
+  restore() {
+    if (localStorage.length !== 0) {
+      const jsonPosts = localStorage.getItem('posts');
+      const objectsArray = JSON.parse(jsonPosts);
+      objectsArray.forEach((post) => {
+        this._photoPosts.push(new PhotoPost(post.id, post.description, post.createdAt, post.author, post.photolink, post.hashtags, post.likes));
+      });
+    }
   }
 
   getPhotoPosts(skip = 0, top = 10, filterConfig = defaultFilterConfig) {
@@ -45,7 +62,8 @@ class PhotoPosts {
         && (a.author === filterConfig.author || filterConfig.author === '')
         && (filterConfig.hashtags.length === 0
         || filterConfig.hashtags.every(el => a.hashtags.includes(el))));
-    filtered = filtered.sort((a, b) => b.createdAt - a.createdAt).slice(skip, skip + top);
+    filtered = filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      .slice(skip, skip + top);
     return filtered;
   }
 
@@ -56,6 +74,7 @@ class PhotoPosts {
   addPhotoPost(post) {
     if (!this.getPhotoPost(post.id) && post.validate()) {
       this._photoPosts.push(post);
+      this.save();
       return true;
     }
     return false;
@@ -69,6 +88,7 @@ class PhotoPosts {
           post[field] = edits[field];
         }
       });
+      this.save();
       return true;
     }
     return false;
@@ -80,6 +100,7 @@ class PhotoPosts {
       return false;
     }
     this._photoPosts.splice(i, 1);
+    this.save();
     return true;
   }
 
@@ -89,6 +110,7 @@ class PhotoPosts {
       const valid = this.addPhotoPost(post);
       if (!valid) badPosts.push(post);
     });
+    this.save();
     return badPosts;
   }
 
