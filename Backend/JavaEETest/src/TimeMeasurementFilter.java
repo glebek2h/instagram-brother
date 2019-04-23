@@ -21,7 +21,7 @@ public class TimeMeasurementFilter implements Filter {
         HttpServletRequest httpServletRequest = ((HttpServletRequest) request);
         String requestURI = httpServletRequest.getRequestURI();
 
-        System.out.println((end - start) + "ms");
+        System.out.println(String.format("%s '%s' - done (%d ms)",httpServletRequest.getMethod(),httpServletRequest.getRequestURI(),end - start));
     }
 
     @Override
