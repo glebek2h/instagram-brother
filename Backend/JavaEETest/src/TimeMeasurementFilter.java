@@ -21,12 +21,7 @@ public class TimeMeasurementFilter implements Filter {
         HttpServletRequest httpServletRequest = ((HttpServletRequest) request);
         String requestURI = httpServletRequest.getRequestURI();
 
-        if (requestURI.startsWith("/")) {
-            request.getRequestDispatcher(requestURI.concat(" - " + (end - start) + "ms"))
-                    .forward(request,response);
-        } else {
-            chain.doFilter(httpServletRequest, response);
-        }
+        System.out.println((end - start) + "ms");
     }
 
     @Override
