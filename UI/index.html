@@ -12,235 +12,35 @@
     <header>
         <h1 class = "site-name"> glebogram </h1>
         <button class="add-post"><i class="fas fa-plus fa-2x"></i></button>
-        <div class = "user-name">gleb9990</div>
-        <button id = "log-out"><img src="images/user-image.png" alt="user-image" id = "user-pic"></button>
-        <button id = "sign-in"><span>sign in</span></button>
+        <div class = "user-name"></div>
+        <button class = "log-out"><i class="fas fa-sign-out-alt fa-2x"></i></button>
+        <button class = "sign-in"><span>sign in</span></button>
     </header>
     <main >
         <div id = "wrapper">
-            <div class = "post">
-                <p class = "postInfo">
-                    <b>user_name</b><date>date</date> 
-                </p>
-                <div class="image">
-                    <img src="images/2.jpg" alt="1" width="640" height="640">
-                </div>
-                <div class = "description">
-                    <button class="like"><i class="far fa-thumbs-up fa-2x"></i></button>
-                    <p>
-                        <b>user_name</b> Herring sea chub Sevan trout sleeper shark, 
-                        zebra shark chum salmon, mudminnow Atlantic silverside South American 
-                        Lungfish European eel. Goldspotted killifish snubnose eel Sacramento 
-                        splittail zingel <button class="description-button">...</button><br> 
+            <!--Here will be our posts-->
+            <template id="post-template">
+                <div class = "post">
+                    <p class = "postInfo">
+                        <b data-target="author"></b><date data-target="createdAt"></date> 
                     </p>
-                    <ul class="tags-block">
-                        <li class="tag"><a href="" >#famcs</a></li>
-                        <li class="tag"><a href="" >#bsu</a></li>
-                        <li class="tag"><a href="" >#programming</a></li>
-                    </ul>
-                    
+                    <div class="image">
+                        <img data-target="photolink"  alt="1" width="640" height="640">
+                    </div>
+                    <div class = "description">
+                        <button class="like" ><i class="far fa-thumbs-up fa-2x"></i></button><p class="likes-count" data-target="likes"></p>
+                        <button class="edit-post"><i class="far fa-edit fa-2x"></i></button>
+                        <button class="delete-post"><i class="far fa-trash-alt fa-2x"></i></button>
+                        <span class="text-description">
+                            <b data-target="author"></b>
+                            <div data-target="description"></div>
+                            <button class="description-button">...</button><br> 
+                        </span>
+                        <ul class="tags-block">
+                        </ul>  
+                    </div>
                 </div>
-            </div>
-            <div class = "post">
-                <p class = "postInfo">
-                    <b>user_name</b><date>date</date> 
-                </p>
-                <div class="image">
-                    <img src="images/3.jpg" alt="1" width="640" height="640">
-                </div>
-                <div class = "description">
-                    <button class="like"><i class="far fa-thumbs-up fa-2x"></i></button>
-                    <p>
-                        <b>user_name</b> Herring sea chub Sevan trout sleeper shark, 
-                        zebra shark chum salmon, mudminnow Atlantic silverside South American 
-                        Lungfish European eel. Goldspotted killifish snubnose eel Sacramento 
-                        splittail zingel <button class="description-button">...</button><br> 
-                    </p>
-                    <ul class="tags-block">
-                            <li class="tag"><a href="" >#famcs</a></li>
-                            <li class="tag"><a href="" >#bsu</a></li>
-                            <li class="tag"><a href="" >#programming</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class = "post">
-                <p class = "postInfo">
-                    <b>user_name</b><date>date</date> 
-                </p>
-                <div class="image">
-                    <img src="images/1.jpg" alt="1" width="640" height="640">
-                </div>
-                <div class = "description">
-                    <button class="like"><i class="far fa-thumbs-up fa-2x"></i></button>
-                    <p>
-                        <b>user_name</b> Herring sea chub Sevan trout sleeper shark, 
-                        zebra shark chum salmon, mudminnow Atlantic silverside South American 
-                        Lungfish European eel. Goldspotted killifish snubnose eel Sacramento 
-                        splittail zingel <button class="description-button">...</button><br> 
-                    </p>
-                    <ul class="tags-block">
-                            <li class="tag"><a href="" >#famcs</a></li>
-                            <li class="tag"><a href="" >#bsu</a></li>
-                            <li class="tag"><a href="" >#programming</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class = "post">
-                <p class = "postInfo">
-                    <b>user_name</b><date>date</date> 
-                </p>
-                <div class="image">
-                    <img src="images/4.jpg" alt="1" width="640" height="640">
-                </div>
-                <div class = "description">
-                    <button class="like"><i class="far fa-thumbs-up fa-2x"></i></button>
-                    <p>
-                        <b>user_name</b> Herring sea chub Sevan trout sleeper shark, 
-                        zebra shark chum salmon, mudminnow Atlantic silverside South American 
-                        Lungfish European eel. Goldspotted killifish snubnose eel Sacramento 
-                        splittail zingel <button class="description-button">...</button><br> 
-                    </p>
-                    <ul class="tags-block">
-                            <li class="tag"><a href="" >#famcs</a></li>
-                            <li class="tag"><a href="" >#bsu</a></li>
-                            <li class="tag"><a href="" >#programming</a></li>
-                    </ul> 
-                </div>
-            </div>
-            <div class = "post">
-                <p class = "postInfo">
-                    <b>user_name</b><date>date</date> 
-                </p>
-                <div class="image">
-                    <img src="images/5.jpg" alt="1" width="640" height="640">
-                </div>
-                <div class = "description">
-                    <button class="like"><i class="far fa-thumbs-up fa-2x"></i></button>
-                    <p>
-                        <b>user_name</b> Herring sea chub Sevan trout sleeper shark, 
-                        zebra shark chum salmon, mudminnow Atlantic silverside South American 
-                        Lungfish European eel. Goldspotted killifish snubnose eel Sacramento 
-                        splittail zingel <button class="description-button">...</button><br> 
-                    </p>
-                    <ul class="tags-block">
-                            <li class="tag"><a href="" >#famcs</a></li>
-                            <li class="tag"><a href="" >#bsu</a></li>
-                            <li class="tag"><a href="" >#programming</a></li>
-                    </ul> 
-                </div>
-            </div>
-            <div class = "post">
-                <p class = "postInfo">
-                    <b>user_name</b><date>date</date> 
-                </p>
-                <div class="image">
-                    <img src="images/6.jpg" alt="1" width="640" height="640">
-                </div>
-                <div class = "description">
-                    <button class="like"><i class="far fa-thumbs-up fa-2x"></i></button>
-                    <p>
-                        <b>user_name</b> Herring sea chub Sevan trout sleeper shark, 
-                        zebra shark chum salmon, mudminnow Atlantic silverside South American 
-                        Lungfish European eel. Goldspotted killifish snubnose eel Sacramento 
-                        splittail zingel <button class="description-button">...</button><br> 
-                    </p>
-                    <ul class="tags-block">
-                            <li class="tag"><a href="" >#famcs</a></li>
-                            <li class="tag"><a href="" >#bsu</a></li>
-                            <li class="tag"><a href="" >#programming</a></li>
-                    </ul> 
-                </div>
-            </div>
-            <div class = "post">
-                <p class = "postInfo">
-                    <b>user_name</b><date>date</date> 
-                </p>
-                <div class="image">
-                    <img src="images/7.jpg" alt="1" width="640" height="640">
-                </div>
-                <div class = "description">
-                    <button class="like"><i class="far fa-thumbs-up fa-2x"></i></button>
-                    <p>
-                        <b>user_name</b> Herring sea chub Sevan trout sleeper shark, 
-                        zebra shark chum salmon, mudminnow Atlantic silverside South American 
-                        Lungfish European eel. Goldspotted killifish snubnose eel Sacramento 
-                        splittail zingel <button class="description-button">...</button><br> 
-                    </p>
-                    <ul class="tags-block">
-                            <li class="tag"><a href="" >#famcs</a></li>
-                            <li class="tag"><a href="" >#bsu</a></li>
-                            <li class="tag"><a href="" >#programming</a></li>
-                    </ul> 
-                </div>
-            </div>
-            <div class = "post">
-                <p class = "postInfo">
-                    <b>user_name</b><date>date</date> 
-                </p>
-                <div class="image">
-                    <img src="images/8.jpg" alt="1" width="640" height="640">
-                </div>
-                <div class = "description">
-                    <button class="like"><i class="far fa-thumbs-up fa-2x"></i></button>
-                    <p>
-                        <b>user_name</b> Herring sea chub Sevan trout sleeper shark, 
-                        zebra shark chum salmon, mudminnow Atlantic silverside South American 
-                        Lungfish European eel. Goldspotted killifish snubnose eel Sacramento 
-                        splittail zingel <button class="description-button">...</button><br> 
-                    </p>
-                    <ul class="tags-block">
-                            <li class="tag"><a href="" >#famcs</a></li>
-                            <li class="tag"><a href="" >#bsu</a></li>
-                            <li class="tag"><a href="" >#programming</a></li>
-                    </ul> 
-                </div>
-            </div>
-            <div class = "post">
-                <p class = "postInfo">
-                    <b>user_name</b><date>date</date> 
-                </p>
-                <div class="image">
-                    <img src="images/9.jpg" alt="1" width="640" height="640">
-                </div>
-                <div class = "description">
-                    <button class="like"><i class="far fa-thumbs-up fa-2x"></i></button>
-                    <p>
-                        <b>user_name</b> Herring sea chub Sevan trout sleeper shark, 
-                        zebra shark chum salmon, mudminnow Atlantic silverside South American 
-                        Lungfish European eel. Goldspotted killifish snubnose eel Sacramento 
-                        splittail zingel <button class="description-button">...</button><br> 
-                    </p>
-                    <ul class="tags-block">
-                            <li class="tag"><a href="" >#famcs</a></li>
-                            <li class="tag"><a href="" >#bsu</a></li>
-                            <li class="tag"><a href="" >#programming</a></li>
-                    </ul>  
-                </div>
-            </div>
-            <div class = "post">
-                <p class = "postInfo">
-                    <b>user_name</b><date>date</date> 
-                </p>
-                <div class="image">
-                    <img src="images/10.jpg" alt="1" width="640" height="640">
-                </div>
-                <div class = "description">
-                    <button class="like"><i class="far fa-thumbs-up fa-2x"></i></button>
-                    <p>
-                        <b>user_name</b> Herring sea chub Sevan trout sleeper shark, 
-                        zebra shark chum salmon, mudminnow Atlantic silverside South American 
-                        Lungfish European eel. Goldspotted killifish snubnose eel Sacramento 
-                        splittail zingel <button class="description-button">...</button><br> 
-                    </p>
-                    <ul class="tags-block">
-                            <li class="tag"><a href="" >#famcs</a></li>
-                            <li class="tag"><a href="" >#bsu</a></li>
-                            <li class="tag"><a href="" >#programming</a></li>
-                    </ul>  
-                </div>
-            </div>
-            <button id = "show-more">show more...</button>
-            
+            </template>
         </div>
         <aside id = "sidebar">
             <form action="javascript:alert('filter')" method="post" class="search-form">
@@ -249,8 +49,8 @@
             </form>
             <button id = "filter"><span>filter by date</span> </button>   
         </aside>
-    
-    </main>
+    </main> 
+    <button id = "show-more">show more...</button>
     <footer>
         <div class = "footer-site-name"> glebogram </div>
         <p class="footer-elems">
@@ -259,10 +59,10 @@
             <b><time datetime="2019-03-21">last update - today ;)</time></b>
             <a href = "mailto: raul221299@gmail.com">raul221299@gmail.com</a> 
         </p>  
-        
     </footer>
-    
     <script src="scripts/posts.js"></script>
+    <script src="scripts/view.js"></script>
+    <script src="scripts/MVC.js"></script>
     <script src="scripts/test.js"></script>
 </body>
 </html>
