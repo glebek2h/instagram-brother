@@ -1,17 +1,18 @@
-package bsu.fpmi.instagram;
+package bsu.fpmi.instagram.common;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Post {
-    private String id;
+    private int id;
     private String description;
-    private String createdAt;
+    private Date createdAt;
     private String author;
     private String photoLink;
     private ArrayList<String> likes;
     private ArrayList<String> tags;
 
-    public Post(String id, String description, String createdAt, String author,
+    public Post(int id, String description, Date createdAt, String author,
                 String photoLink, ArrayList<String> likes, ArrayList<String> tags) {
         this.id = id;
         this.description = description;
@@ -22,7 +23,7 @@ public class Post {
         this.tags = tags;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -30,7 +31,7 @@ public class Post {
         return description;
     }
 
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
