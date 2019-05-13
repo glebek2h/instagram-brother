@@ -12,7 +12,7 @@ class View {
     this.user = user;
   }
 
-  addPost(post) {
+   addPost(post) {
     if (this.photoPosts.addPhotoPost(post)) {
       const postNode = View.buildPost(post);
       this.wrapper.insertAdjacentElement('afterbegin', postNode);
@@ -32,23 +32,28 @@ class View {
     return false;
   }
 
-  editPost(id, edits) {
-    if (this.photoPosts.editPhotoPost(id, edits)) {
+  async editPost(id, edits) {
+      await this.photoPosts.editPhotoPost(id, edits);
       const childNode = document.querySelector(`[data-id="${id}"]`);
       if (childNode) {
-        const editedChildNode = View.buildPost(this.photoPosts.getPhotoPost(id));
-        childNode.parentNode.replaceChild(editedChildNode, childNode);
+          const post = await this.photoPosts.getPhotoPost(id);
+          const editedChildNode = View.buildPost(post);
+          childNode.parentNode.replaceChild(editedChildNode, childNode);
       }
-      return true;
-    }
-    return false;
   }
 
-  showPosts(skip = 0, top = 10, filterConfig = defaultFilterConfig) {
-    this.photoPosts.getPhotoPosts(skip, top, filterConfig).forEach((post) => {
-      const postNode = View.buildPost(post);
-      this.wrapper.insertAdjacentElement('beforeend', postNode);
-    });
+  async showPosts(skip = 0, top = 10, filterConfig = defaultFilterConfig) {
+   /* this.photoPosts.getPhotoPosts(skip, top, filterConfig)
+        .then(posts => posts.forEach((post) => {
+          const postNode = View.buildPost(post);
+          this.wrapper.insertAdjacentElement('beforeend', postNode);
+        }));*/
+    const posts = await this.photoPosts.getPhotoPosts(skip, top, filterConfig);
+      posts.forEach((post) => {
+          const postNode = View.buildPost(post);
+          this.wrapper.insertAdjacentElement('beforeend', postNode);
+      });
+
   }
 
   setAuthorized(user) {

@@ -1,6 +1,6 @@
 
 function test() {
-  const Posts = new PhotoPosts();
+  const Posts = new PostsService();
   Posts.addPhotoPost(new PhotoPost('1', '_DESCRIPTION', new Date('2011-02-23T23:00:00'), 'gleb9990', 'LINK', ['#famcs'], ['kek']));
   Posts.addPhotoPost(new PhotoPost('2', '_DESCRIPTION', new Date('2000-02-23T23:00:00'), 'nastya', 'LINK', ['#bsu'], ['lol', 'kek']));
   Posts.addPhotoPost(new PhotoPost('3', '_DESCRIPTION', new Date('2018-02-23T23:00:00'), 'glebek2h', 'LINK', ['#famcs', '#bsu'], ['lol', 'kek']));
@@ -124,7 +124,8 @@ function test() {
 }
 
 function viewMvcTest() {
-  const photoPosts = new PhotoPosts();
+  const photoPosts = new PostsService();
+  /*
   if (localStorage.length === 0) {
     photoPosts.addPhotoPost(new PhotoPost('1', '1 refers to an image of the character HACKERMAN from the 2015 film Kung Fury that is used in jokes regarding a persons inflated sense of self-esteem when they solve a simple technical issue. ', new Date('4/12/2007, 9:59 PM'), 'gleb9990', 'resources/images/1.jpg', ['#famcs'], ['kek']));
     photoPosts.addPhotoPost(new PhotoPost('2', '2  refers to an image of the character HACKERMAN from the 2015 film Kung Fury that is used in jokes regarding a persons inflated sense of self-esteem when they solve a simple technical issue. ', new Date('4/12/2012, 9:59 PM'), 'nastya', 'resources/images/2.jpg', ['#bsu'], ['lol', 'kek']));
@@ -153,6 +154,7 @@ function viewMvcTest() {
     photoPosts.addPhotoPost(new PhotoPost('26', '26 refers to an image of the character HACKERMAN from the 2015 film Kung Fury that is used in jokes regarding a persons inflated sense of self-esteem when they solve a simple technical issue. ', new Date('4/12/2019, 9:59 PM'), 'gleb', 'resources/images/27.jpg', ['#famcs', ' #bsu', '#kek'], ['lol', 'kek']));
     photoPosts.addPhotoPost(new PhotoPost('27', '27 refers to an image of the character HACKERMAN from the 2015 film Kung Fury that is used in jokes regarding a persons inflated sense of self-esteem when they solve a simple technical issue. ', new Date('4/12/2007, 9:59 PM'), 'gleb9990', 'resources/images/9.jpg', ['#famcs', '#bsu'], ['lol', 'kek', '1', 'kek', '1', 'kek', '1', 'kek', '1', 'kek', '1', 'kek', '1', 'kek', '1', 'kek', '1', 'kek', '1', 'kek', '1']));
   }
+  */
   const wrapper = document.querySelector('#wrapper');
   const header = document.querySelector('header');
   const sidebar = document.querySelector('#sidebar');

@@ -152,7 +152,7 @@ function addWrapperListener(view, wrapper) {
             inputTags.value = post.dataset.tags;
             inputDescription.value = post.dataset.description;
             const edits = {};
-            edits.id = `${randomInteger(1000, 10000)}`;
+            edits.id = post.dataset.id;
             edits.likes = [];
             inputPhoto.oninput = function () {
               edits.photolink = `resources/images/${inputPhoto.files[0].name}`;
@@ -167,11 +167,11 @@ function addWrapperListener(view, wrapper) {
             inputDescription.onchange = function () {
               edits.description = inputDescription.value;
             };
-            document.querySelector('.continue').onclick = function () {
+            document.querySelector('.continue').onclick = async function () {
               document.querySelector('.add-post-form').style.display = 'none';
               edits.author = view.user.name;
               edits.createdAt = new Date().toLocaleString('en-US', dateConfig);
-              view.editPost(post.dataset.id, edits);
+              await view.editPost(post.dataset.id, edits);
               return false;
             };
             realTarget.dataset.clicked = '0';
