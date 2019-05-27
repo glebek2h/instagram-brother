@@ -1,5 +1,9 @@
 instagram-brother.iml
 
+*.class
+
+target/
+
 JavaEETest.iml
 
 .DS_Store/
