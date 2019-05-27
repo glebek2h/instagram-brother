@@ -29,13 +29,15 @@ public class PostRest extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         String id = req.getParameter("id");
         resp.getWriter().println(gson.toJson(service.getPost(id)));
+        resp.setStatus(200);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String JSONPost = req.getReader().readLine();
-        service.addPost(gson.fromJson(JSONPost, new TypeToken<Post>(){}.getType()));
+        service.addPost(gson.fromJson(JSONPost, Post.class));
         resp.getWriter().println(gson.toJson(service.getPage(0,10, new FilterConfig())));
+        resp.setStatus(200);
     }
 
     @Override

@@ -12,7 +12,7 @@ class View {
     this.user = user;
   }
 
-   addPost(post) {
+   async addPost(post) {
     if (this.photoPosts.addPhotoPost(post)) {
       const postNode = View.buildPost(post);
       this.wrapper.insertAdjacentElement('afterbegin', postNode);
@@ -33,7 +33,7 @@ class View {
   }
 
   async editPost(id, edits) {
-      await this.photoPosts.editPhotoPost(id, edits);
+      await this.photoPosts.editPhotoPost(id, edits);// todo get rid of that
       const childNode = document.querySelector(`[data-id="${id}"]`);
       if (childNode) {
           const post = await this.photoPosts.getPhotoPost(id);

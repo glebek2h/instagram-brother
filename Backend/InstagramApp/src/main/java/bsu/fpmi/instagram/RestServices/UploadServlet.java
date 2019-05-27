@@ -16,16 +16,15 @@ public class UploadServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Part part = request.getPart("upload");
-        InputStream stream = part.getInputStream();
-        File uploads = new File(getServletContext().getInitParameter("uploadDirectory"));
+        File uploads = new File(getServletContext().getInitParameter("dir"));
         File file = new File(uploads, part.getSubmittedFileName());
-        Files.copy(stream, file.toPath());
+        Files.copy(part.getInputStream(), file.toPath());
         response.getOutputStream().println("resources/images/" + part.getSubmittedFileName());
     }
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String imageName = request.getParameter("image");
-        response.getOutputStream().println("<img src = 'resources/img/" + imageName + "' alt=\"File not found.\"/>");
+        response.getOutputStream().println("<img src = 'resources/images/" + imageName + "' alt=\"File not found.\"/>");
     }
 }

@@ -25,12 +25,14 @@
 </header>
 <main>
     <form class="add-post-form">
-        <input type="file" name="photo" multiple accept="image/*,image/jpeg" class = "photo-input">
         <div><p>user_name</p><input type = "text" placeholder="" class="inp-user" readonly></div>
         <div><p>current_date</p><div class="current-date"></div></div>
         <div><p>hashtags</p><textarea name="tags" class="add-post-form-tags" name="text"></textarea> </div>
         <div><p>photo description</p><textarea name="desc"  class="add-post-form-des" name = "text"></textarea></div>
-        <button class="continue">continue</button>
+        <form enctype="multipart/form-data" class="file-upload-form">
+            <input type="file" name="upload" multiple accept="image/*,image/jpeg" class = "photo-input">
+            <button class="continue">continue</button>
+        </form>
     </form>
     <form class="authorization-form">
         <div><p>login</p><input class="input-login" type = "text"></div>
@@ -48,7 +50,7 @@
                     <img data-target="photolink"  alt="1" width="640" height="640">
                 </div>
                 <div class = "description">
-                    <button data-action="like" class="like-btn" ><span><i class="far fa-thumbs-up fa-2x"></span></i></button>
+                    <button data-action="like" class="like-btn" ><span><i class="far fa-thumbs-up fa-2x"></i></span></button>
                     <button data-action="edit" class="edit-post-btn"><i class="far fa-edit fa-2x"></i></button>
                     <button data-action="delete" class="delete-post-btn"><i class="far fa-trash-alt fa-2x"></i></button>
                     <p class="likes-count" data-target="likes"></p>
