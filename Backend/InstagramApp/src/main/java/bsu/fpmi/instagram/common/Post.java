@@ -1,24 +1,35 @@
 package bsu.fpmi.instagram.common;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 public class Post {
     private String id;
     private String description;
     private Date createdAt;
     private String author;
-    private String photoLink;
-    private ArrayList<String> likes;
-    private ArrayList<String> hashtags;
+    private String photolink;
+    private List<String> likes;
+    private List<String> hashtags;
 
+    public Post() {
+        this.id = "";
+        this.description = "";
+        this.createdAt = new Date();
+        this.author = "";
+        this.photolink = "";
+        this.likes = Collections.emptyList();
+        this.hashtags = Collections.emptyList();
+    }
     public Post(String id, String description, Date createdAt, String author,
-                String photoLink, ArrayList<String> likes, ArrayList<String> tags) {
+                String photolink, ArrayList<String> likes, ArrayList<String> tags) {
         this.id = id;
         this.description = description;
         this.createdAt = createdAt;
         this.author = author;
-        this.photoLink = photoLink;
+        this.photolink = photolink;
         this.likes = likes;
         this.hashtags = tags;
     }
@@ -39,15 +50,15 @@ public class Post {
         return author;
     }
 
-    public String getPhotoLink() {
-        return photoLink;
+    public String getPhotolink() {
+        return photolink;
     }
 
-    public ArrayList<String> getLikes() {
+    public List<String> getLikes() {
         return likes;
     }
 
-    public ArrayList<String> getHashtags() {
+    public List<String> getHashtags() {
         return hashtags;
     }
 
@@ -67,15 +78,15 @@ public class Post {
         this.author = author;
     }
 
-    public void setPhotoLink(String photoLink) {
-        this.photoLink = photoLink;
+    public void setPhotolink(String photolink) {
+        this.photolink = photolink;
     }
 
-    public void setLikes(ArrayList<String> likes) {
+    public void setLikes(List<String> likes) {
         this.likes = likes;
     }
 
-    public void setHashtags(ArrayList<String> hashtags) {
+    public void setHashtags(List<String> hashtags) {
         this.hashtags = hashtags;
     }
 
@@ -86,7 +97,7 @@ public class Post {
                 ", description='" + description + '\'' +
                 ", createdAt=" + createdAt +
                 ", author='" + author + '\'' +
-                ", photoLink='" + photoLink + '\'' +
+                ", photolink='" + photolink + '\'' +
                 ", likes=" + likes +
                 ", hashtags=" + hashtags +
                 '}';

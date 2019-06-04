@@ -5,7 +5,7 @@ import bsu.fpmi.instagram.common.Post;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class InMemoryPostService implements IPostService {
+public class InMemoryPostService /*implements IPostService*/ {
 
     private ArrayList<Post> posts;
 
@@ -24,7 +24,7 @@ public class InMemoryPostService implements IPostService {
         posts.add(post3);
     }
 
-    @Override
+    //@Override
     public Post getPost(String id) {
         for (int i = 0; i < posts.size(); i++) {
             if (posts.get(i).getId().equals(id)) {
@@ -38,7 +38,7 @@ public class InMemoryPostService implements IPostService {
         return Boolean.compare(b, false);
     }
 
-    @Override
+    //@Override
     public ArrayList<Post> getPage(int skip, int top, FilterConfig filterConfig) {//TODO: need some fixes
         ArrayList<Post> returnValue;
         returnValue = posts.stream().filter(post -> (post.getCreatedAt().after(filterConfig.getDateFrom())
@@ -51,12 +51,12 @@ public class InMemoryPostService implements IPostService {
         return returnValue;
     }
 
-    @Override
+    //@Override
     public boolean addPost(Post post) {
         return posts.add(post) ? true : false;
     }
 
-    @Override
+    //@Override
     public boolean deletePost(String id) {
         for (int i = 0; i < posts.size(); i++) {
             if (posts.get(i).getId().equals(id)) {
@@ -67,13 +67,13 @@ public class InMemoryPostService implements IPostService {
         return false;
     }
 
-    @Override
+    //@Override
     public boolean editPost(Post newPost) {
         for (int i = 0; i < posts.size(); i++) {
             if (posts.get(i).getId().equals(newPost.getId())) {
                 posts.get(i).setDescription(newPost.getDescription());
                 posts.get(i).setHashtags(newPost.getHashtags());
-                posts.get(i).setPhotoLink(newPost.getPhotoLink());
+                posts.get(i).setPhotolink(newPost.getPhotolink());
                 System.out.println(posts.get(i));
                 return true;
             }

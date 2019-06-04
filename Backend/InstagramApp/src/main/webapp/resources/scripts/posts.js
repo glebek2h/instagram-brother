@@ -1,4 +1,4 @@
-
+"use strict";
 /**
  * Always store items ordered by date
  */
@@ -31,7 +31,7 @@ class PhotoPost {
 }
 class PostsService {
 
-  async getPhotoPosts(skip, top, config) {// TODO
+  async getPhotoPosts(skip, top, config) { // TODO
     const response = await fetch(`/photoposts`, {
       method: 'GET',
     }).catch(error => console.log(error));
@@ -53,7 +53,7 @@ class PostsService {
   async addPhotoPost(post) {
     const postId = await this.getPhotoPost(post.id).id;
     if (!postId && post.validate()) {
-      const response = await fetch('/photo-post', {
+      const response = fetch('/photo-post', {
         method: 'POST',
         body: JSON.stringify(post),
       }).catch(error => console.log(error));

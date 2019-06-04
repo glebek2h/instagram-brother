@@ -4,6 +4,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
 
+
     <servlet>
         <servlet-name>PostsServlet</servlet-name>
         <servlet-class>bsu.fpmi.instagram.RestServices.PostRest</servlet-class>
@@ -40,4 +41,10 @@
         <servlet-name>UploadServlet</servlet-name>
         <url-pattern>/upload</url-pattern>
     </servlet-mapping>
+
+    <context-param>
+        <param-name>dir</param-name>
+        <param-value>/Users/fpm.kazachin/Desktop/InstagramApp/src/main/webapp/resources/images</param-value>
+    </context-param>
+
 </web-app>

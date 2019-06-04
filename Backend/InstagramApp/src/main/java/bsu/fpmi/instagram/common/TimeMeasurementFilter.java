@@ -9,10 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class TimeMeasurementFilter implements Filter {
-    private InMemoryPostService service;
     @Override
     public void init(FilterConfig filterConfig) {
-        service  = new InMemoryPostService();
     }
 
     @Override
@@ -22,11 +20,11 @@ public class TimeMeasurementFilter implements Filter {
         chain.doFilter(request, response);
         long end = System.currentTimeMillis();
 
+
         HttpServletRequest httpServletRequest = ((HttpServletRequest) request);
         String requestURI = httpServletRequest.getRequestURI();
 
         System.out.println(String.format("%s '%s' - done (%d ms)",httpServletRequest.getMethod(),httpServletRequest.getRequestURI(),end - start));
-        System.out.println(service);
     }
 
     @Override

@@ -79,7 +79,7 @@ function editPostButtonHandling(realTarget, view) {
 }
 function addHeaderListener(view, header) {
   const form = document.querySelector('.add-post-form');
-  const inputPhoto = form.firstChild.nextSibling;
+  const inputPhoto = document.querySelector('.photo-input');
   const inputTags = document.querySelector('.add-post-form-tags');
   const inputDescription = document.querySelector('.add-post-form-des');
   header.addEventListener('click', (event) => {
@@ -97,6 +97,20 @@ function addHeaderListener(view, header) {
           inputPhoto.oninput = function () {
             post.photolink = `resources/images/${inputPhoto.files[0].name}`;
           };
+          /*inputPhoto.oninput = function(){
+            const fileForm = inputPhoto.closest('form');
+            const formData = new FormData(fileForm);
+            fetch('/upload', {
+              method: 'POST',
+              body: formData,
+            }).then((response) => {
+              if (!response.ok) {
+                console.log(response.statusText);
+              } else {
+                response.text().then(r => console.log(r));
+              }
+            }).catch(err => console.log(err));
+          };*/
           inputTags.onchange = function () {
             const tagsArray = inputTags.value.split('#');
             tagsArray.forEach((tag) => {
@@ -167,13 +181,13 @@ function addWrapperListener(view, wrapper) {
             inputDescription.onchange = function () {
               edits.description = inputDescription.value;
             };
-            document.querySelector('.continue').onclick = async function () {
-              document.querySelector('.add-post-form').style.display = 'none';
-              edits.author = view.user.name;
-              edits.createdAt = new Date().toLocaleString('en-US', dateConfig);
-              await view.editPost(post.dataset.id, edits);
-              return false;
-            };
+            document.querySelector('.continue').addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector('.add-post-form').style.display = 'none';
+                edits.author = view.user.name;
+                edits.createdAt = new Date();
+                view.editPost(post.dataset.id, edits);
+            });
             realTarget.dataset.clicked = '0';
           }
           break;
