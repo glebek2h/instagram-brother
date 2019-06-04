@@ -22,6 +22,6 @@ public class PostListRest extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.getWriter().println(gson.toJson(service.getPage(0,10,new FilterConfig())));
+        response.getWriter().write(gson.toJson(service.getPage(0,10,new FilterConfig())));
     }
 }

@@ -28,11 +28,7 @@ public class PostRest extends HttpServlet {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         String id = req.getParameter("id");
-        int result;
-        if(id != null) {
-            result = Integer.parseInt(id);
-            resp.getWriter().println(gson.toJson(service.getPost(result)));
-        }
+        resp.getWriter().println(gson.toJson(service.getPost(id)));
     }
 
     @Override
@@ -52,12 +48,8 @@ public class PostRest extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
-        int result;
-        resp.getWriter().println("Collection before delete post :\n" + gson.toJson(service.getPage(0,10,new FilterConfig())));
-        if(id != null) {
-            result = Integer.parseInt(id);
-            service.deletePost(result);
-        }
-        resp.getWriter().println("Collection after delete post :\n" + gson.toJson(service.getPage(0,10,new FilterConfig())));
+        resp.getWriter().println("Collection before delete post :\n" + gson.toJson(service.getPage(0, 10, new FilterConfig())));
+        service.deletePost(id);
+        resp.getWriter().println("Collection after delete post :\n" + gson.toJson(service.getPage(0, 10, new FilterConfig())));
     }
 }

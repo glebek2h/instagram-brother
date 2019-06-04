@@ -89,7 +89,7 @@
 </footer>
 <script src="resources/scripts/posts.js"></script>
 <script src="resources/scripts/view.js"></script>
-<script src="resources/scripts/MVC.js"></script>
+<script src="resources/scripts/controller.js"></script>
 <script src="resources/scripts/test.js"></script>
 </body>
 </html>
