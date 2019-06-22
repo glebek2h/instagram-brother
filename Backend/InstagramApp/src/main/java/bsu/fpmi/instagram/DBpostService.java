@@ -8,7 +8,7 @@ import java.util.*;
 
 public class DBpostService implements IPostService {
     private static final String userName = "root";
-    private static final String password = "seva221299A";
+    private static final String password = "1234";
     private static final String connectionURL = "jdbc:mysql://localhost:3306/meh?useSSL=false";
     private Connection connection = null;
 
